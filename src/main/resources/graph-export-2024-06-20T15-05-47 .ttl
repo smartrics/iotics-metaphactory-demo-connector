@@ -1,0 +1,19 @@
+@prefix schema: <https://schema.org/> .
+@prefix soa: <https://semopenalex.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ds: <https://dimensions.ai/ontology/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<https://ontologies.metaphacts.com/iotics-car-digital-twin/OperationalStatusFeedValue/instances/cb7f1124-0e61-48a6-802e-43cf7b012975>
+  a <https://ontologies.metaphacts.com/iotics-car-digital-twin/OperationalStatusFeedValue>;
+  rdfs:label "Operational Status Feed Value";
+  <http://data.iotics.com/iotics#valueKey> "value";
+  <http://data.iotics.com/iotics#valueType> "boolean" .

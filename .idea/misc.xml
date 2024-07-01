@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Black">
+    <option name="sdkName" value="Python 3.12 (cars)" />
+  </component>
+  <component name="EntryPointsManager">
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="smartrics.iotics.connectors.twins.annotations.Feed" />
+      <item index="1" class="java.lang.String" itemvalue="smartrics.iotics.connectors.twins.annotations.LangLiteralProperty" />
+      <item index="2" class="java.lang.String" itemvalue="smartrics.iotics.connectors.twins.annotations.LiteralProperty" />
+      <item index="3" class="java.lang.String" itemvalue="smartrics.iotics.connectors.twins.annotations.Location" />
+      <item index="4" class="java.lang.String" itemvalue="smartrics.iotics.connectors.twins.annotations.StringLiteralProperty" />
+      <item index="5" class="java.lang.String" itemvalue="smartrics.iotics.connectors.twins.annotations.UriProperty" />
+    </list>
+    <writeAnnotations>
+      <writeAnnotation name="smartrics.iotics.connectors.twins.annotations.StringLiteralProperty" />
+    </writeAnnotations>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

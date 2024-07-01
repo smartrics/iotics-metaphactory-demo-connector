@@ -1,0 +1,39 @@
+@prefix schema: <https://schema.org/> .
+@prefix soa: <https://semopenalex.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ds: <https://dimensions.ai/ontology/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<https://vocabularies.metaphacts.com/operational-status-feed> a skos:ConceptScheme;
+  rdfs:label "Operational Status Feed"@en;
+  skos:prefLabel "Operational Status Feed"@en;
+  dct:modified "2024-06-20T12:27:17.919Z"^^xsd:dateTime;
+  dct:title "Operational Status Feed"@en;
+  <http://www.linkedmodel.org/1.2/schema/vaem#namespace> <https://vocabularies.metaphacts.com/operational-status-feed/>;
+  <http://open-services.net/ns/core#modifiedBy> "admin";
+  dct:contributor "admin";
+  dct:created "2024-06-20T08:38:47.023Z"^^xsd:dateTime;
+  dct:creator "admin";
+  skos:hasTopConcept <https://vocabularies.metaphacts.com/operational-status-feed/5e1aec4a-7f1b-4fad-b073-eed48c3a1fa8> .
+
+<https://vocabularies.metaphacts.com/operational-status-feed/5e1aec4a-7f1b-4fad-b073-eed48c3a1fa8>
+  a <https://ontologies.metaphacts.com/iotics-car-digital-twin/OperationalStatusFeed>;
+  rdfs:label "Operational Status Feed ";
+  skos:inScheme <https://vocabularies.metaphacts.com/operational-status-feed>;
+  skos:prefLabel "Operetional Status Feed"@en;
+  dct:modified "2024-06-20T12:27:17.919Z"^^xsd:dateTime;
+  schema:frequency 1;
+  <http://open-services.net/ns/core#modifiedBy> "admin";
+  dct:contributor "admin";
+  dct:created "2024-06-20T08:39:07.203Z"^^xsd:dateTime;
+  dct:creator "admin";
+  <http://data.iotics.com/iotics#storesLast> false;
+  <http://data.iotics.com/iotics#presents> <https://ontologies.metaphacts.com/iotics-car-digital-twin/OperationalStatusFeedValue/instances/cb7f1124-0e61-48a6-802e-43cf7b012975> .
