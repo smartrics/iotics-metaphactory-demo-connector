@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  iotics-metaphactory-demo-connector:
+    image: smartrics/iotics-metaphactory-demo-connector:0.1
+    container_name: iotics-metaphactory-demo-connector
+    ports:
+      - "80:8080"
+      - "443:8443"
+    env_file:
+      - .env
+    volumes:
+      - ./src/main/resources:/app/resources
+      - ./target/logs:/app/logs
+    restart: always

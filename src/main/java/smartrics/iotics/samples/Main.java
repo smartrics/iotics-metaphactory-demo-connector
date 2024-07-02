@@ -51,7 +51,6 @@ public class Main {
         String httpPort = Optional.ofNullable(System.getenv(ENV_SPARQL_PORT)).orElse("8080");
         String httpsPort = Optional.ofNullable(System.getenv(ENV_SPARQL_SECURE_PORT)).orElse("8443");
 
-
         EventBus eventBus = EventBus.getDefault();
         Database database = new Database();
 
