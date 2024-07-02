@@ -1,7 +1,6 @@
 package smartrics.iotics.samples.http;
 
 import io.vertx.core.AbstractVerticle;
-import io.vertx.core.Launcher;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
@@ -14,9 +13,6 @@ import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import org.apache.logging.log4j.util.Strings;
 import org.eclipse.rdf4j.common.lang.FileFormat;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.util.ModelBuilder;
-import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URLDecoder;
@@ -32,9 +28,14 @@ import static smartrics.iotics.samples.http.ContentTypesMap.mimeFor;
 
 public class SparqlEndpoint extends AbstractVerticle {
     private static final Logger LOGGER = LoggerFactory.getLogger(SparqlEndpoint.class);
+    private final Database database;
+    private String port;
+    private String securePort;
 
-    public static void main(String[] args) {
-        Launcher.executeCommand("run", SparqlEndpoint.class.getName());
+    public SparqlEndpoint(String httpPort, String httpSecurePort, Database database) {
+        this.database = database;
+        this.port = httpPort;
+        this.securePort = httpSecurePort;
     }
 
     private static String generateShortUUID() {
@@ -135,9 +136,6 @@ public class SparqlEndpoint extends AbstractVerticle {
     }
 
     public void start() {
-        Database database = new Database();
-
-        String port = Optional.ofNullable(System.getenv("PORT")).orElse("8080");
         Router router = createRouter(database);
         LOGGER.info("Starting on port " + port);
         vertx.createHttpServer()
@@ -151,7 +149,6 @@ public class SparqlEndpoint extends AbstractVerticle {
                 });
 
         // HTTPS server
-        String httpsPort = Optional.ofNullable(System.getenv("SECURE_PORT")).orElse("8443");
         HttpServerOptions options = new HttpServerOptions()
                 .setSsl(true)
                 .setKeyCertOptions(new PemKeyCertOptions()
@@ -159,12 +156,12 @@ public class SparqlEndpoint extends AbstractVerticle {
                         .setKeyPath("./ssl/server.key")
                 );
 
-        LOGGER.info("Starting on secure port " + httpsPort);
+        LOGGER.info("Starting on secure port " + securePort);
         vertx.createHttpServer(options)
                 .requestHandler(router)
-                .listen(Integer.parseInt(httpsPort), http -> {
+                .listen(Integer.parseInt(securePort), http -> {
                     if (http.succeeded()) {
-                        LOGGER.info("HTTPS server started on port " + httpsPort);
+                        LOGGER.info("HTTPS server started on port " + securePort);
                     } else {
                         LOGGER.error("HTTPS server failed to start", http.cause());
                     }

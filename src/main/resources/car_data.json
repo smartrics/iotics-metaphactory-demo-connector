@@ -1,0 +1,17 @@
+[
+    {
+        "unit": 81,
+        "comment": "A car digital twin labelled Car-Mercedes-Benz-GLE-C5HS5A",
+        "label": "Car-Mercedes-Benz-GLE-C5HS5A",
+        "manufacturerName": "Mercedes-Benz",
+        "colour": "Grey",
+        "model": "GLE",
+        "identifier": "C5HS5A",
+        "owner": "Paul Clark",
+        "isOperational": false,
+        "location": {
+            "latitude": 51.513434,
+            "longitude": -0.157231
+        }
+    }
+]

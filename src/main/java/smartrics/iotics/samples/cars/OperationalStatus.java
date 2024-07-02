@@ -17,4 +17,7 @@ public class OperationalStatus {
         this.opStatus = opStatus;
     }
 
+    public Boolean opStatus() {
+        return opStatus;
+    }
 }

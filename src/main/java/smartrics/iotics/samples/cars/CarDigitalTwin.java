@@ -1,19 +1,18 @@
 package smartrics.iotics.samples.cars;
 
 import com.iotics.api.GeoLocation;
-import smartrics.iotics.connectors.twins.AbstractTwin;
-import smartrics.iotics.connectors.twins.AnnotationMapper;
-import smartrics.iotics.connectors.twins.MappableMaker;
-import smartrics.iotics.connectors.twins.Mapper;
+import com.iotics.api.ShareFeedDataRequest;
+import smartrics.iotics.connectors.twins.*;
 import smartrics.iotics.connectors.twins.annotations.*;
 import smartrics.iotics.host.IoticsApi;
 import smartrics.iotics.host.UriConstants;
 import smartrics.iotics.identity.Identity;
 import smartrics.iotics.identity.IdentityManager;
 
+import java.util.List;
 import java.util.Random;
 
-public class CarDigitalTwin extends AbstractTwin implements MappableMaker, AnnotationMapper {
+public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, MappableMaker, AnnotationMapper {
 
     public static final String ONT_PREFIX = "https://ontologies.metaphacts.com/iotics-car-digital-twin";
     public static final String SCHEMA_PREFIX = "http://schema.org";

@@ -6,63 +6,56 @@ import io.vertx.core.impl.logging.LoggerFactory;
 import io.vertx.ext.web.RoutingContext;
 import org.eclipse.rdf4j.common.lang.FileFormat;
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.query.*;
-import org.eclipse.rdf4j.query.resultio.*;
+import org.eclipse.rdf4j.query.resultio.TupleQueryResultWriter;
+import org.eclipse.rdf4j.query.resultio.TupleQueryResultWriterFactory;
+import org.eclipse.rdf4j.query.resultio.sparqljson.SPARQLResultsJSONWriterFactory;
+import org.eclipse.rdf4j.query.resultio.sparqlxml.SPARQLResultsXMLWriterFactory;
+import org.eclipse.rdf4j.query.resultio.text.csv.SPARQLResultsCSVWriterFactory;
+import org.eclipse.rdf4j.query.resultio.text.tsv.SPARQLResultsTSVWriterFactory;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.sail.SailRepository;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 import org.eclipse.rdf4j.sail.memory.MemoryStore;
-import org.eclipse.rdf4j.query.resultio.text.csv.SPARQLResultsCSVWriterFactory;
-import org.eclipse.rdf4j.query.resultio.sparqljson.SPARQLResultsJSONWriterFactory;
-import org.eclipse.rdf4j.query.resultio.sparqlxml.SPARQLResultsXMLWriterFactory;
-import org.eclipse.rdf4j.query.resultio.text.tsv.SPARQLResultsTSVWriterFactory;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
+import java.util.function.Consumer;
 
-import static smartrics.iotics.samples.http.ContentTypesMap.*;
+import static smartrics.iotics.samples.http.ContentTypesMap.UNRECOGNISED;
 
 public class Database {
     private static final Logger LOGGER = LoggerFactory.getLogger(Database.class);
 
     private final Repository repository;
 
-    public Database(){
+    public Database() {
         repository = new SailRepository(new MemoryStore());
         repository.init();
-        loadExampleData();
     }
 
-    private void loadExampleData() {
+    public void set(Model model) {
         try (RepositoryConnection conn = repository.getConnection()) {
-            ModelBuilder builder = new ModelBuilder();
-            builder.setNamespace("ex", "http://example.org/")
-                    .subject("ex:john")
-                    .add("ex:name", "John")
-                    .add("ex:age", 28);
-
-            Model model = builder.build();
+            model.subjects().forEach(resource -> conn.remove(resource, null, null));
             conn.add(model);
         }
     }
-
 
     public void run(String query, RoutingContext context, String acceptHeader) {
         try (RepositoryConnection conn = repository.getConnection()) {
             Query preparedQuery = conn.prepareQuery(QueryLanguage.SPARQL, query);
 
-            if (preparedQuery instanceof TupleQuery) {
-                handleTupleQuery((TupleQuery) preparedQuery, context, acceptHeader);
-            } else if (preparedQuery instanceof GraphQuery) {
-                handleGraphQuery((GraphQuery) preparedQuery, context, acceptHeader);
-            } else if (preparedQuery instanceof BooleanQuery) {
-                handleBooleanQuery((BooleanQuery) preparedQuery, context);
-            } else {
-                context.response().setStatusCode(400).end("Unsupported query type");
+            switch (preparedQuery) {
+                case TupleQuery tupleQuery -> handleTupleQuery(tupleQuery, context, acceptHeader);
+                case GraphQuery graphQuery -> handleGraphQuery(graphQuery, context, acceptHeader);
+                case BooleanQuery booleanQuery -> handleBooleanQuery(booleanQuery, context);
+                case null, default -> context.response().setStatusCode(400).end("Unsupported query type");
             }
         } catch (Exception e) {
             context.response().setStatusCode(500).end(e.getMessage());
@@ -105,7 +98,7 @@ public class Database {
             Model model = QueryResults.asModel(result);
             StringWriter out = new StringWriter();
             FileFormat format = ContentTypesMap.get(acceptHeader, UNRECOGNISED);
-            if(format.equals(UNRECOGNISED)) {
+            if (format.equals(UNRECOGNISED)) {
                 context.response().setStatusCode(400).end(ErrorMessage.toJson("unrecognised or invalid accept header"));
             } else {
                 Rio.write(model, out, (RDFFormat) format);
