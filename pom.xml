@@ -171,13 +171,6 @@
             <artifactId>vertx-web-client</artifactId>
             <version>4.5.7</version>
         </dependency>
-
-        <!-- Logging dependencies -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.4.12</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
