@@ -1,7 +1,6 @@
 package smartrics.iotics.samples.cars;
 
 import com.iotics.api.GeoLocation;
-import com.iotics.api.ShareFeedDataRequest;
 import smartrics.iotics.connectors.twins.*;
 import smartrics.iotics.connectors.twins.annotations.*;
 import smartrics.iotics.host.IoticsApi;
@@ -9,20 +8,15 @@ import smartrics.iotics.host.UriConstants;
 import smartrics.iotics.identity.Identity;
 import smartrics.iotics.identity.IdentityManager;
 
-import java.util.List;
-import java.util.Random;
-
 public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, MappableMaker, AnnotationMapper {
 
     public static final String ONT_PREFIX = "https://ontologies.metaphacts.com/iotics-car-digital-twin";
     public static final String SCHEMA_PREFIX = "http://schema.org";
 
-    @UriProperty(iri = UriConstants.RDFProperty.Type)
-    private final String type = ONT_PREFIX + "/CarDigitalTwin";
-
     @UriProperty(iri = UriConstants.IOTICSProperties.HostAllowListName)
     public final String visibility = UriConstants.IOTICSProperties.HostAllowListValues.ALL.toString();
-
+    @UriProperty(iri = UriConstants.RDFProperty.Type)
+    private final String type = ONT_PREFIX + "/CarDigitalTwin";
     @LiteralProperty(iri = ONT_PREFIX + "/unit", dataType = XsdDatatype.int_)
     private Integer unit;
     @StringLiteralProperty(iri = UriConstants.RDFSProperty.Comment)
@@ -44,13 +38,20 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
     @Location
     private GeoLocation location;
 
+    private MovingCar movingCar;
+
     CarDigitalTwin(IoticsApi api, IdentityManager sim, Identity myIdentity) {
         super(api, sim, myIdentity);
     }
 
-    @Feed(id="status")
+    @Feed(id = "status")
     public OperationalStatus getOpStatus() {
-        return new OperationalStatus(new Random().nextBoolean());
+        return this.movingCar.currentOperationalStatus();
+    }
+
+    @Feed(id = "locationData")
+    public LocationData getLocationData() {
+        return this.movingCar.currentLocationData();
     }
 
     public String getLabel() {
@@ -76,6 +77,7 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
         private Identity myIdentity;
         private IoticsApi api;
         private IdentityManager sim;
+        private Integer updatePeriodSec;
 
         private CarDigitalTwinBuilder() {
         }
@@ -91,6 +93,11 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
 
         public CarDigitalTwinBuilder withComment(String comment) {
             this.comment = comment;
+            return this;
+        }
+
+        public CarDigitalTwinBuilder withUpdatePeriodSec(Integer updatePeriodSec) {
+            this.updatePeriodSec = updatePeriodSec;
             return this;
         }
 
@@ -161,6 +168,7 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
             carDigitalTwin.manufacturerName = this.manufacturerName;
             carDigitalTwin.colour = this.colour;
             carDigitalTwin.model = this.model;
+            carDigitalTwin.movingCar = new MovingCar(this.location.getLat(), this.location.getLon(), this.updatePeriodSec);
             return carDigitalTwin;
         }
     }

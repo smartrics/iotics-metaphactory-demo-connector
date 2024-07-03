@@ -8,7 +8,6 @@ import com.iotics.api.*;
 import io.grpc.stub.StreamObserver;
 import io.vertx.core.impl.logging.Logger;
 import io.vertx.core.impl.logging.LoggerFactory;
-import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import smartrics.iotics.host.Builders;
@@ -18,6 +17,8 @@ import smartrics.iotics.samples.http.Database;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
@@ -36,21 +37,19 @@ public class CarDigitalTwinLoader {
     private final IoticsApi api;
     private final SimpleIdentityManager sim;
     private final RandomScheduler<Void> scheduler;
-    private final int sharePeriodSec;
 
     public CarDigitalTwinLoader(EventBus eventBus, Database database, IoticsApi api, SimpleIdentityManager sim, int sharePeriodSec) {
         this.executorService = Executors.newSingleThreadExecutor();
         this.handlersExecutor = Executors.newCachedThreadPool();
         this.scheduler = new RandomScheduler<>(sharePeriodSec, sharePeriodSec / 2, 8);
         this.gson = new GsonBuilder()
-                .registerTypeAdapter(CarDigitalTwin.class, new CarDigitalTwinDeserializer(api, sim))
+                .registerTypeAdapter(CarDigitalTwin.class, new CarDigitalTwinDeserializer(api, sim, sharePeriodSec))
                 .registerTypeAdapter(GeoLocation.class, new GeoLocationDeserializer()).create();
         this.eventBus = eventBus;
         this.eventBus.register(this);
         this.database = database;
         this.api = api;
         this.sim = sim;
-        this.sharePeriodSec = sharePeriodSec;
     }
 
     public void shutdown() {
@@ -84,21 +83,30 @@ public class CarDigitalTwinLoader {
 
     @Subscribe
     public void startShare(CarShareEvent event) {
+
         CarDigitalTwin car = event.car();
 
         Consumer<Void> onSuccess = unused -> LOGGER.debug("Successfully scheduled sharing [did=" + car.getMyIdentity().did() + "]");
         Consumer<Throwable> onError = throwable -> LOGGER.debug("Exception sharing [did=" + car.getMyIdentity().did() + "]", throwable);
 
-        retrieveValueID(car.getMyIdentity().did(), valueID -> scheduler.start (() -> {
+        retrieveValueIDs(car.getMyIdentity().did(), bindings -> scheduler.start(() -> {
             OperationalStatus opStatus = car.getOpStatus();
-            Boolean object = opStatus.opStatus();
-            ModelBuilder builder = new ModelBuilder();
-            builder.setNamespace("ns", "https://ontologies.metaphacts.com/iotics-car-digital-twin/")
-                    .subject("ns:" + valueID)
-                    .add("ns:payloadValue", object);
-            database.set(builder.build());
+            LocationData locationData = car.getLocationData();
+            Binding.find(bindings, "status", "value").ifPresent(binding -> {
+                database.set(Sem.createModel(binding, opStatus.opStatus()));
+            });
+            Binding.find(bindings, "locationData", "speed").ifPresent(binding -> {
+                database.set(Sem.createModel(binding, locationData.speed()));
+            });
+            Binding.find(bindings, "locationData", "direction").ifPresent(binding -> {
+                database.set(Sem.createModel(binding, locationData.direction()));
+            });
+            Binding.find(bindings, "locationData", "wktLiteral").ifPresent(binding -> {
+                database.set(Sem.locationModel(binding, locationData.wktLiteral()));
+            });
+
             CompletableFuture<Void> future = car.share();
-            future.thenAccept(unused -> LOGGER.info("Shared Car data [did=" + car.getMyIdentity().did() + ", payload=" + object + "]"));
+            future.thenAccept(unused -> LOGGER.info("Shared Car data [did=" + car.getMyIdentity().did() + "]"));
             return null;
         }, onSuccess, onError));
     }
@@ -123,20 +131,27 @@ public class CarDigitalTwinLoader {
         }, handlersExecutor);
     }
 
-    private void retrieveValueID(String did, Consumer<String> handler) {
+    private void retrieveValueIDs(String did, Consumer<List<Binding>> handler) {
         String didQ = "<" + did + ">";
         String sparql = """
-                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                PREFIX iot: <http://data.iotics.com/iotics#>
-
-                SELECT ?presentID
+                PREFIX iotics: <http://data.iotics.com/iotics#>
+                SELECT ?pointID ?pointName ?valueID ?valueKey
                 WHERE {
-                  ?resource iot:advertises ?advertisedID .
-                  ?advertisedID iot:presents ?presentID .
-                  VALUES ?resource {
-                """ + didQ + """
-                  }
+                    # Bind the resource ID
+                    BIND (""" + didQ + """ 
+                    AS ?resource)
+
+                    # Get the advertise IDs
+                    ?resource iotics:advertises ?pointID .
+
+                    # For each advertise ID, get the point name and presented values
+                    ?pointID iotics:pointName ?pointName ;
+                                 iotics:presents ?valueID .
+
+                    # For each presented value, get the value key
+                    OPTIONAL {
+                        ?valueID iotics:valueKey ?valueKey .
+                    }
                 }
                 """;
         api.metaAPI().sparqlQuery(SparqlQueryRequest.newBuilder()
@@ -149,20 +164,23 @@ public class CarDigitalTwinLoader {
             @Override
             public void onNext(SparqlQueryResponse sparqlQueryResponse) {
                 String bet = sparqlQueryResponse.getPayload().getResultChunk().toStringUtf8();
-                String id = null;
+                List<Binding> binds = new ArrayList<>();
                 try {
                     JsonObject jsonObject = JsonParser.parseString(bet).getAsJsonObject();
                     JsonArray bindings = jsonObject.getAsJsonObject("results")
                             .getAsJsonArray("bindings");
-                    if (!bindings.isEmpty()) {
-                        JsonObject firstBinding = bindings.get(0).getAsJsonObject();
-                        JsonObject presentID = firstBinding.getAsJsonObject("presentID");
-                        id = presentID.get("value").getAsString();
-                    }
+                    bindings.forEach(jsonElement -> {
+                        JsonObject el = jsonElement.getAsJsonObject();
+                        String pointID = el.getAsJsonObject("pointID").get("value").getAsString();
+                        String pointName = el.getAsJsonObject("pointName").get("value").getAsString();
+                        String valueID = el.getAsJsonObject("valueID").get("value").getAsString();
+                        String valueKey = el.getAsJsonObject("valueKey").get("value").getAsString();
+                        binds.add(new Binding(pointID, pointName, valueID, valueKey));
+                    });
                 } catch (Exception e) {
                     LOGGER.warn("unable to get the ID", e);
                 }
-                handler.accept(id);
+                handler.accept(binds);
             }
 
             @Override

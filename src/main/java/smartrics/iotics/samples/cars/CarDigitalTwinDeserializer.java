@@ -12,10 +12,12 @@ public class CarDigitalTwinDeserializer implements JsonDeserializer<CarDigitalTw
 
     private final IoticsApi api;
     private final IdentityManager sim;
+    private final Integer sharePeriodSec;
 
-    public CarDigitalTwinDeserializer(IoticsApi api, IdentityManager sim) {
+    public CarDigitalTwinDeserializer(IoticsApi api, IdentityManager sim, Integer sharePeriodSec) {
         this.api = api;
         this.sim = sim;
+        this.sharePeriodSec = sharePeriodSec;
     }
 
     @Override
@@ -53,6 +55,7 @@ public class CarDigitalTwinDeserializer implements JsonDeserializer<CarDigitalTw
                 .withOwner(owner)
                 .withModel(model)
                 .withManufacturerName(manufacturerName)
+                .withUpdatePeriodSec(sharePeriodSec)
                 .build();
     }
 }
