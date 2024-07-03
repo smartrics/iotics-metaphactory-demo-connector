@@ -91,19 +91,12 @@ public class CarDigitalTwinLoader {
 
         retrieveValueIDs(car.getMyIdentity().did(), bindings -> scheduler.start(() -> {
             OperationalStatus opStatus = car.getOpStatus();
+            List<Binding> status = Binding.filter(bindings, "status");
+            database.set(Sem.createStatusModel(car.getMyIdentity().did(), status, opStatus));
+
             LocationData locationData = car.getLocationData();
-            Binding.find(bindings, "status", "value").ifPresent(binding -> {
-                database.set(Sem.createModel(binding, opStatus.opStatus()));
-            });
-            Binding.find(bindings, "locationData", "speed").ifPresent(binding -> {
-                database.set(Sem.createModel(binding, locationData.speed()));
-            });
-            Binding.find(bindings, "locationData", "direction").ifPresent(binding -> {
-                database.set(Sem.createModel(binding, locationData.direction()));
-            });
-            Binding.find(bindings, "locationData", "wktLiteral").ifPresent(binding -> {
-                database.set(Sem.locationModel(binding, locationData.wktLiteral()));
-            });
+            List<Binding> loc = Binding.filter(bindings, "locationData");
+            database.set(Sem.createLocationDataModel(car.getMyIdentity().did(), loc, locationData));
 
             CompletableFuture<Void> future = car.share();
             future.thenAccept(unused -> LOGGER.info("Shared Car data [did=" + car.getMyIdentity().did() + "]"));
