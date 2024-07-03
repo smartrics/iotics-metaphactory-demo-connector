@@ -1,5 +1,7 @@
 package smartrics.iotics.samples.cars.model;
 
+import io.vertx.core.impl.logging.Logger;
+import io.vertx.core.impl.logging.LoggerFactory;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.query.QueryResults;
 import org.eclipse.rdf4j.query.TupleQuery;
@@ -18,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class TTLParser {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TTLParser.class);
+
     public static void main(String[] args) throws IOException {
         File folder = new File("src/main/resources");
         String packageName = "smartrics.iotics.samples.cars";
@@ -26,7 +30,7 @@ public class TTLParser {
         File[] listOfFiles = folder.listFiles((dir, name) -> name.toLowerCase().endsWith("2.ttl"));
 
         if (listOfFiles == null) {
-            System.out.println("No .ttl files found in the directory.");
+            LOGGER.warn("No .ttl files found in the directory.");
             return;
         }
 
@@ -79,7 +83,7 @@ public class TTLParser {
                     List<Property> properties = entry.getValue();
                     GeneratedClass genClass = JavaClassGenerator.generateClass(className, properties, packageName);
                     if(!ClassWriter.saveToFile(rootDirectory, genClass)) {
-                        System.out.println("unable to write class " + genClass.className());
+                        LOGGER.warn("unable to write class " + genClass.className());
                     }
                 }
             }
