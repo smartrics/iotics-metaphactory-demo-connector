@@ -2,8 +2,8 @@ package smartrics.iotics.samples;
 
 import io.vertx.core.Verticle;
 import io.vertx.core.Vertx;
-import io.vertx.core.impl.logging.Logger;
-import io.vertx.core.impl.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.greenrobot.eventbus.EventBus;
 import smartrics.iotics.host.HostEndpoints;
 import smartrics.iotics.host.HttpServiceRegistry;
@@ -63,7 +63,7 @@ public class Main {
         // Deploy the Verticle
         vertx.deployVerticle(sparqlEndpointVerticle, res -> {
             if (res.succeeded()) {
-                LOGGER.info("Deployment id is: " + res.result());
+                LOGGER.info("Deployment id is: {}", res.result());
             } else {
                 LOGGER.info("Deployment failed!");
             }

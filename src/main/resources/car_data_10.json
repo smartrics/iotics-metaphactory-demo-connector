@@ -1,0 +1,152 @@
+[
+    {
+        "unit": 81,
+        "comment": "A car digital twin labelled Car-Mercedes-Benz-GLE-C5HS5A",
+        "label": "Car-Mercedes-Benz-GLE-C5HS5A",
+        "manufacturerName": "Mercedes-Benz",
+        "colour": "Grey",
+        "model": "GLE",
+        "identifier": "C5HS5A",
+        "owner": "Paul Clark",
+        "isOperational": false,
+        "location": {
+            "latitude": 51.513434,
+            "longitude": -0.157231
+        }
+    },
+    {
+        "unit": 92,
+        "comment": "A car digital twin labelled Car-Subaru-Ascent-0QCV7C",
+        "label": "Car-Subaru-Ascent-0QCV7C",
+        "manufacturerName": "Subaru",
+        "colour": "Red",
+        "model": "Ascent",
+        "identifier": "0QCV7C",
+        "owner": "Thomas Young",
+        "isOperational": false,
+        "location": {
+            "latitude": 51.475479,
+            "longitude": -0.104007
+        }
+    },
+    {
+        "unit": 58,
+        "comment": "A car digital twin labelled Car-Ford-Mustang-V3VPL1",
+        "label": "Car-Ford-Mustang-V3VPL1",
+        "manufacturerName": "Ford",
+        "colour": "Red",
+        "model": "Mustang",
+        "identifier": "V3VPL1",
+        "owner": "Samantha Carter",
+        "isOperational": true,
+        "location": {
+            "latitude": 51.507644,
+            "longitude": -0.127845
+        }
+    },
+    {
+        "unit": 96,
+        "comment": "A car digital twin labelled Car-Toyota-Camry-IZMVP8",
+        "label": "Car-Toyota-Camry-IZMVP8",
+        "manufacturerName": "Toyota",
+        "colour": "Black",
+        "model": "Camry",
+        "identifier": "IZMVP8",
+        "owner": "Jessica Wright",
+        "isOperational": true,
+        "location": {
+            "latitude": 51.542414,
+            "longitude": -0.056834
+        }
+    },
+    {
+        "unit": 76,
+        "comment": "A car digital twin labelled Car-BMW-7 Series-GD3VLX",
+        "label": "Car-BMW-7 Series-GD3VLX",
+        "manufacturerName": "BMW",
+        "colour": "Green",
+        "model": "7 Series",
+        "identifier": "GD3VLX",
+        "owner": "Samantha Carter",
+        "isOperational": false,
+        "location": {
+            "latitude": 51.404762,
+            "longitude": -0.236021
+        }
+    },
+    {
+        "unit": 71,
+        "comment": "A car digital twin labelled Car-Mercedes-Benz-S-Class-8GP0U4",
+        "label": "Car-Mercedes-Benz-S-Class-8GP0U4",
+        "manufacturerName": "Mercedes-Benz",
+        "colour": "Blue",
+        "model": "S-Class",
+        "identifier": "8GP0U4",
+        "owner": "Daniel Taylor",
+        "isOperational": true,
+        "location": {
+            "latitude": 51.614159,
+            "longitude": -0.095033
+        }
+    },
+    {
+        "unit": 32,
+        "comment": "A car digital twin labelled Car-Nissan-Sentra-6MX73A",
+        "label": "Car-Nissan-Sentra-6MX73A",
+        "manufacturerName": "Nissan",
+        "colour": "Blue",
+        "model": "Sentra",
+        "identifier": "6MX73A",
+        "owner": "Daniel Taylor",
+        "isOperational": true,
+        "location": {
+            "latitude": 51.670062,
+            "longitude": -0.10263
+        }
+    },
+    {
+        "unit": 48,
+        "comment": "A car digital twin labelled Car-Hyundai-Elantra-25JYOI",
+        "label": "Car-Hyundai-Elantra-25JYOI",
+        "manufacturerName": "Hyundai",
+        "colour": "Black",
+        "model": "Elantra",
+        "identifier": "25JYOI",
+        "owner": "Michelle Perez",
+        "isOperational": true,
+        "location": {
+            "latitude": 51.519935,
+            "longitude": -0.08723
+        }
+    },
+    {
+        "unit": 67,
+        "comment": "A car digital twin labelled Car-Fiat-500-6FHISM",
+        "label": "Car-Fiat-500-6FHISM",
+        "manufacturerName": "Fiat",
+        "colour": "Red",
+        "model": "500",
+        "identifier": "6FHISM",
+        "owner": "Gary Phillips",
+        "isOperational": true,
+        "location": {
+            "latitude": 51.606042,
+            "longitude": -0.128885
+        }
+    },
+    {
+        "unit": 40,
+        "comment": "A car digital twin labelled Car-Nissan-Rogue-RGIMO7",
+        "label": "Car-Nissan-Rogue-RGIMO7",
+        "manufacturerName": "Nissan",
+        "colour": "Pink",
+        "model": "Rogue",
+        "identifier": "RGIMO7",
+        "owner": "Charles King",
+        "isOperational": true,
+        "location": {
+            "latitude": 51.487737,
+            "longitude": -0.122072
+        }
+    }
+]

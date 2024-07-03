@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 ssl/
 .env
+**/*.log
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

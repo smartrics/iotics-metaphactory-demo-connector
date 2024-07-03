@@ -4,8 +4,6 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
-import io.vertx.core.impl.logging.Logger;
-import io.vertx.core.impl.logging.LoggerFactory;
 import io.vertx.core.net.PemKeyCertOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
@@ -14,13 +12,14 @@ import io.vertx.ext.web.handler.StaticHandler;
 import org.apache.logging.log4j.util.Strings;
 import org.eclipse.rdf4j.common.lang.FileFormat;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URLDecoder;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -29,8 +28,8 @@ import static smartrics.iotics.samples.http.ContentTypesMap.mimeFor;
 public class SparqlEndpoint extends AbstractVerticle {
     private static final Logger LOGGER = LoggerFactory.getLogger(SparqlEndpoint.class);
     private final Database database;
-    private String port;
-    private String securePort;
+    private final String port;
+    private final String securePort;
 
     public SparqlEndpoint(String httpPort, String httpSecurePort, Database database) {
         this.database = database;
@@ -125,24 +124,24 @@ public class SparqlEndpoint extends AbstractVerticle {
         String headers = ctx.request().headers().entries().stream().map(e -> e.getKey() + ":" + e.getValue()).collect(Collectors.joining(", "));
         String id = generateShortUUID();
 
-        LOGGER.debug("Request [id=" + id + "][URI=" + uri + "][method=" + method + "][from=" + remoteAddress + "][absoluteURI=" + absoluteUri + "][headers=" + headers + "]");
+        LOGGER.info("Request [id={}][URI={}][method={}][from={}][absoluteURI={}][headers={}]", id, uri, method, remoteAddress, absoluteUri, headers);
         ctx.addBodyEndHandler(v -> {
             int statusCode = ctx.response().getStatusCode();
             String statusMessage = ctx.response().getStatusMessage();
             String respHeaders = ctx.response().headers().entries().stream().map(e -> e.getKey() + ":" + e.getValue()).collect(Collectors.joining(", "));
-            LOGGER.debug("Response [id=" + id + "][statusCode=" + statusCode + "][statusMessage=" + statusMessage + "][headers=" + respHeaders + "]");
+            LOGGER.info("Response [id={}][statusCode={}][statusMessage={}][headers={}]", id, statusCode, statusMessage, respHeaders);
         });
         ctx.next();
     }
 
     public void start() {
         Router router = createRouter(database);
-        LOGGER.info("Starting on port " + port);
+        LOGGER.info("Starting on port {}", port);
         vertx.createHttpServer()
                 .requestHandler(router)
                 .listen(Integer.parseInt(port), http -> {
                     if (http.succeeded()) {
-                        LOGGER.info("HTTP server started on port " + port);
+                        LOGGER.info("HTTP server started on port {}", port);
                     } else {
                         LOGGER.error("HTTP server failed to start", http.cause());
                     }
@@ -156,12 +155,12 @@ public class SparqlEndpoint extends AbstractVerticle {
                         .setKeyPath("./ssl/server.key")
                 );
 
-        LOGGER.info("Starting on secure port " + securePort);
+        LOGGER.info("Starting on secure port {}", securePort);
         vertx.createHttpServer(options)
                 .requestHandler(router)
                 .listen(Integer.parseInt(securePort), http -> {
                     if (http.succeeded()) {
-                        LOGGER.info("HTTPS server started on port " + securePort);
+                        LOGGER.info("HTTPS server started on port {}", securePort);
                     } else {
                         LOGGER.error("HTTPS server failed to start", http.cause());
                     }

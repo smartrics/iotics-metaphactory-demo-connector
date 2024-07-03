@@ -1,13 +1,11 @@
 package smartrics.iotics.samples.http;
 
 import io.vertx.core.http.HttpServerResponse;
-import io.vertx.core.impl.logging.Logger;
-import io.vertx.core.impl.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import io.vertx.ext.web.RoutingContext;
 import org.eclipse.rdf4j.common.lang.FileFormat;
 import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Resource;
-import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.query.*;
 import org.eclipse.rdf4j.query.resultio.TupleQueryResultWriter;
 import org.eclipse.rdf4j.query.resultio.TupleQueryResultWriterFactory;
@@ -26,7 +24,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 import static smartrics.iotics.samples.http.ContentTypesMap.UNRECOGNISED;
 
@@ -42,8 +39,20 @@ public class Database {
 
     public void set(Model model) {
         try (RepositoryConnection conn = repository.getConnection()) {
-            model.subjects().forEach(resource -> conn.remove(resource, null, null));
-            conn.add(model);
+            model.subjects().forEach(resource ->
+            {
+                try {
+                    conn.remove(resource, null, null);
+                } catch (Exception e) {
+                    LOGGER.warn("unable to remove model for resource " + resource.stringValue());
+                }
+            });
+            try {
+                conn.add(model);
+                LOGGER.warn("added " + model);
+            } catch (Exception e) {
+                LOGGER.warn("unable to remove model for resource " + model);
+            }
         }
     }
 

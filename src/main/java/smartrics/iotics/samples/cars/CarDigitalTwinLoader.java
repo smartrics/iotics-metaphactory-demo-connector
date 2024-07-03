@@ -6,8 +6,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.protobuf.ByteString;
 import com.iotics.api.*;
 import io.grpc.stub.StreamObserver;
-import io.vertx.core.impl.logging.Logger;
-import io.vertx.core.impl.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import smartrics.iotics.host.Builders;
@@ -86,8 +86,8 @@ public class CarDigitalTwinLoader {
 
         CarDigitalTwin car = event.car();
 
-        Consumer<Void> onSuccess = unused -> LOGGER.debug("Successfully scheduled sharing [did=" + car.getMyIdentity().did() + "]");
-        Consumer<Throwable> onError = throwable -> LOGGER.debug("Exception sharing [did=" + car.getMyIdentity().did() + "]", throwable);
+        Consumer<Void> onSuccess = unused -> LOGGER.info("Successfully scheduled sharing [did={}]", car.getMyIdentity().did());
+        Consumer<Throwable> onError = throwable -> LOGGER.info("Exception sharing [did={}]", car.getMyIdentity().did(), throwable);
 
         retrieveValueIDs(car.getMyIdentity().did(), bindings -> scheduler.start(() -> {
             OperationalStatus opStatus = car.getOpStatus();
@@ -99,7 +99,7 @@ public class CarDigitalTwinLoader {
             database.set(Sem.createLocationDataModel(car.getMyIdentity().did(), loc, locationData));
 
             CompletableFuture<Void> future = car.share();
-            future.thenAccept(unused -> LOGGER.info("Shared Car data [did=" + car.getMyIdentity().did() + "]"));
+            future.thenAccept(unused -> LOGGER.info("Shared Car data [did={}]", car.getMyIdentity().did()));
             return null;
         }, onSuccess, onError));
     }
@@ -111,7 +111,7 @@ public class CarDigitalTwinLoader {
         result.addListener(() -> {
             try {
                 UpsertTwinResponse done = result.get();
-                LOGGER.debug("Processed car " + counter.incrementAndGet() + ": " + car.getLabel() + ", with did: " + done.getPayload().getTwinId().getId());
+                LOGGER.info("Processed car {}: {}, with did: {}", counter.incrementAndGet(), car.getLabel(), done.getPayload().getTwinId().getId());
                 eventBus.post(new CarShareEvent(event.car()));
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();

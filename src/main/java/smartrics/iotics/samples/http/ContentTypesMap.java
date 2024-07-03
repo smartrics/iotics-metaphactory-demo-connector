@@ -27,9 +27,12 @@ public class ContentTypesMap {
     static {
         resultFormat.put("application/sparql-results+xml", TupleQueryResultFormat.SPARQL);
         resultFormat.put("text/xml", TupleQueryResultFormat.SPARQL);
+        resultFormat.put("application/xml", TupleQueryResultFormat.SPARQL);
         resultFormat.put("application/sparql-results+json", TupleQueryResultFormat.JSON);
         resultFormat.put("text/json", TupleQueryResultFormat.JSON);
+        resultFormat.put("application/json", TupleQueryResultFormat.JSON);
         resultFormat.put("text/csv", TupleQueryResultFormat.CSV);
+        resultFormat.put("application/csv", TupleQueryResultFormat.CSV);
         resultFormat.put("text/tab-separated-values", TupleQueryResultFormat.TSV);
 
         resultFormat.put("application/rdf+xml", RDFFormat.RDFXML);
