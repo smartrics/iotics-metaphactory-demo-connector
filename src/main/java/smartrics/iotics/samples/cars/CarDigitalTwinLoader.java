@@ -168,11 +168,14 @@ public class CarDigitalTwinLoader {
                         String pointName = el.getAsJsonObject("pointName").get("value").getAsString();
                         String valueID = el.getAsJsonObject("valueID").get("value").getAsString();
                         String valueKey = el.getAsJsonObject("valueKey").get("value").getAsString();
-                        binds.add(new Binding(pointID, pointName, valueID, valueKey));
+                        Binding binding = new Binding(did, pointID, pointName, valueID, valueKey);
+                        LOGGER.info("found binding {}", binding);
+                        binds.add(binding);
                     });
                 } catch (Exception e) {
-                    LOGGER.warn("unable to get the ID", e);
+                    LOGGER.warn("unable to get the ID for {}", did, e);
                 }
+                LOGGER.info("found {} bindings for {}", binds.size(), did);
                 handler.accept(binds);
             }
 

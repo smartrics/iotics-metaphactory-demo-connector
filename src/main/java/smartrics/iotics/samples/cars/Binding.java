@@ -3,7 +3,7 @@ package smartrics.iotics.samples.cars;
 import java.util.List;
 import java.util.Optional;
 
-public record Binding(String pointID, String pointName, String valueID, String valueKey) {
+public record Binding(String did, String pointID, String pointName, String valueID, String valueKey) {
 
     static Optional<Binding> find(List<Binding> bindings, String valueKey) {
         return bindings.stream().filter(binding ->
