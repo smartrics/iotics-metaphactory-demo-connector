@@ -38,7 +38,7 @@ public class MovingCar {
     public void update() {
         updatePosition();
         updateOperationalStatus();
-        LOGGER.info("{} {}", currentOperationalStatus(), currentLocationData());
+        LOGGER.debug("{} {}", currentOperationalStatus(), currentLocationData());
     }
 
     public OperationalStatus currentOperationalStatus() {
@@ -50,7 +50,7 @@ public class MovingCar {
     }
 
     private void updateOperationalStatus() {
-        this.operationalStatus = new OperationalStatus(rand.nextBoolean());
+        this.operationalStatus = new OperationalStatus(rand.nextInt(100) < 95);
     }
 
     private void updatePosition() {

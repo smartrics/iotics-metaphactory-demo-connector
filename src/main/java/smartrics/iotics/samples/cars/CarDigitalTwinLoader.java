@@ -6,10 +6,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.protobuf.ByteString;
 import com.iotics.api.*;
 import io.grpc.stub.StreamObserver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import smartrics.iotics.host.Builders;
 import smartrics.iotics.host.IoticsApi;
 import smartrics.iotics.identity.SimpleIdentityManager;
@@ -19,7 +19,10 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -36,12 +39,10 @@ public class CarDigitalTwinLoader {
     private final IoticsApi api;
     private final SimpleIdentityManager sim;
     private final RandomScheduler<Void> sharingScheduler;
-    private final ScheduledExecutorService scheduler;
 
     public CarDigitalTwinLoader(EventBus eventBus, Database database, IoticsApi api, SimpleIdentityManager sim, int sharePeriodSec) {
         this.loaderExecutor = Executors.newCachedThreadPool();
-        this.scheduler = Executors.newScheduledThreadPool(16);
-        this.sharingScheduler = new RandomScheduler<>(scheduler, sharePeriodSec, sharePeriodSec / 2, 8);
+        this.sharingScheduler = new RandomScheduler<>(sharePeriodSec, sharePeriodSec / 2, 8);
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(CarDigitalTwin.class, new CarDigitalTwinDeserializer(api, sim))
                 .registerTypeAdapter(GeoLocation.class, new GeoLocationDeserializer()).create();
@@ -54,7 +55,6 @@ public class CarDigitalTwinLoader {
 
     public void shutdown() {
         loaderExecutor.shutdown();
-        scheduler.shutdown();
     }
 
     public void loadCarData(boolean shareOnly, InputStream inputStream) throws IOException {
@@ -76,8 +76,6 @@ public class CarDigitalTwinLoader {
                 reader.endArray();
             } catch (IOException e) {
                 throw new IllegalStateException("unable to load data", e);
-            } finally {
-                shutdown();
             }
         });
     }
@@ -87,8 +85,8 @@ public class CarDigitalTwinLoader {
 
         CarDigitalTwin car = event.car();
 
-        Consumer<Void> onSuccess = unused -> LOGGER.info("Successfully scheduled sharing [did={}]", car.getMyIdentity().did());
-        Consumer<Throwable> onError = throwable -> LOGGER.info("Exception sharing [did={}]", car.getMyIdentity().did(), throwable);
+        Consumer<Void> onSuccess = unused -> LOGGER.debug("Successfully scheduled sharing [did={}]", car.getMyIdentity().did());
+        Consumer<Throwable> onError = throwable -> LOGGER.warn("Exception sharing [did={}]", car.getMyIdentity().did(), throwable);
 
         retrieveValueIDs(car.getMyIdentity().did(), bindings -> sharingScheduler.start(() -> {
             car.updateState();
@@ -102,7 +100,7 @@ public class CarDigitalTwinLoader {
             database.set(Sem.createLocationDataModel(car.getMyIdentity().did(), loc, locationData));
 
             CompletableFuture<Void> future = car.share();
-            future.thenAccept(unused -> LOGGER.info("Shared Car data [did={}]", car.getMyIdentity().did()));
+            future.thenAccept(unused -> LOGGER.info("Shared Car data [did={}][{}][{}]", car.getMyIdentity().did(), car.getOpStatus(), car.getLocationData()));
             return null;
         }, onSuccess, onError));
     }

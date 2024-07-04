@@ -17,10 +17,18 @@ class JavaClassGenerator {
     public static GeneratedClass generateClass(String className, List<TTLParser.Property> properties, String packageName) {
         StringBuilder classCode = new StringBuilder();
         classCode.append("package ").append(packageName).append(";\n\n");
+
+        classCode.append("import com.iotics.api.GeoLocation;\n");
+        classCode.append("import smartrics.iotics.connectors.twins.*;\n");
+        classCode.append("import smartrics.iotics.connectors.twins.annotations.*;\n");
+        classCode.append("import smartrics.iotics.host.IoticsApi;\n");
+        classCode.append("import smartrics.iotics.host.UriConstants;\n");
+        classCode.append("import smartrics.iotics.identity.Identity;\n");
+        classCode.append("import smartrics.iotics.identity.IdentityManager;\n");
         classCode.append("import smartrics.iotics.connectors.twins.annotations.LiteralProperty;\n");
         classCode.append("import smartrics.iotics.connectors.twins.annotations.XsdDatatype;\n");
         classCode.append("import smartrics.iotics.connectors.twins.annotations.Feed;\n\n");
-        classCode.append("public class ").append(simpleName(className)).append(" {\n");
+        classCode.append("public class ").append(simpleName(className)).append(" extends AbstractTwin implements MappablePublisher, MappableMaker, AnnotationMapper {\n");
 
         Set<String> processedProperties = new HashSet<>();
 

@@ -8,7 +8,6 @@
         "model": "GLE",
         "identifier": "C5HS5A",
         "owner": "Paul Clark",
-        "isOperational": false,
         "location": {
             "latitude": 51.513434,
             "longitude": -0.157231
@@ -23,7 +22,6 @@
         "model": "Ascent",
         "identifier": "0QCV7C",
         "owner": "Thomas Young",
-        "isOperational": false,
         "location": {
             "latitude": 51.475479,
             "longitude": -0.104007
@@ -38,7 +36,6 @@
         "model": "Mustang",
         "identifier": "V3VPL1",
         "owner": "Samantha Carter",
-        "isOperational": true,
         "location": {
             "latitude": 51.507644,
             "longitude": -0.127845
@@ -53,7 +50,6 @@
         "model": "Camry",
         "identifier": "IZMVP8",
         "owner": "Jessica Wright",
-        "isOperational": true,
         "location": {
             "latitude": 51.542414,
             "longitude": -0.056834
@@ -68,7 +64,6 @@
         "model": "7 Series",
         "identifier": "GD3VLX",
         "owner": "Samantha Carter",
-        "isOperational": false,
         "location": {
             "latitude": 51.404762,
             "longitude": -0.236021
@@ -83,7 +78,6 @@
         "model": "S-Class",
         "identifier": "8GP0U4",
         "owner": "Daniel Taylor",
-        "isOperational": true,
         "location": {
             "latitude": 51.614159,
             "longitude": -0.095033
@@ -98,7 +92,6 @@
         "model": "Sentra",
         "identifier": "6MX73A",
         "owner": "Daniel Taylor",
-        "isOperational": true,
         "location": {
             "latitude": 51.670062,
             "longitude": -0.10263
@@ -113,7 +106,6 @@
         "model": "Elantra",
         "identifier": "25JYOI",
         "owner": "Michelle Perez",
-        "isOperational": true,
         "location": {
             "latitude": 51.519935,
             "longitude": -0.08723
@@ -128,7 +120,6 @@
         "model": "500",
         "identifier": "6FHISM",
         "owner": "Gary Phillips",
-        "isOperational": true,
         "location": {
             "latitude": 51.606042,
             "longitude": -0.128885
@@ -143,7 +134,6 @@
         "model": "Rogue",
         "identifier": "RGIMO7",
         "owner": "Charles King",
-        "isOperational": true,
         "location": {
             "latitude": 51.487737,
             "longitude": -0.122072

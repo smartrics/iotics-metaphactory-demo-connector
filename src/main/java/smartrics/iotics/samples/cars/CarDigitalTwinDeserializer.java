@@ -30,7 +30,6 @@ public class CarDigitalTwinDeserializer implements JsonDeserializer<CarDigitalTw
         String model = jsonObject.get("model").getAsString();
         String identifier = jsonObject.get("identifier").getAsString();
         String owner = jsonObject.get("owner").getAsString();
-        Boolean isOperational = jsonObject.get("isOperational").getAsBoolean();
 
         JsonObject locationObj = jsonObject.get("location").getAsJsonObject();
         double latitude = locationObj.get("latitude").getAsDouble();
@@ -46,13 +45,13 @@ public class CarDigitalTwinDeserializer implements JsonDeserializer<CarDigitalTw
                 .withUnit(unit)
                 .withComment(comment)
                 .withLabel(label)
-                .withColour(colour)
-                .withIdentifier(identifier)
-                .withLocation(location)
-                .withIsOperational(isOperational)
                 .withOwner(owner)
-                .withModel(model)
                 .withManufacturerName(manufacturerName)
+                .withColour(colour)
+                .withModel(model)
+                .withIdentifier(identifier)
+                .withOwner(owner)
+                .withLocation(location)
                 .build();
     }
 }

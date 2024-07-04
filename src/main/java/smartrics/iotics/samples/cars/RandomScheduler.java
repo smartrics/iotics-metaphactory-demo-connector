@@ -14,10 +14,10 @@ public class RandomScheduler<T> {
     private final int variance;
     private volatile boolean running = true;
 
-    public RandomScheduler(ScheduledExecutorService scheduler, int period, int variance, int tasksThreadPoolSize) {
+    public RandomScheduler(int period, int variance, int tasksThreadPoolSize) {
         this.period = period;
         this.variance = variance;
-        this.scheduler = scheduler;
+        this.scheduler = Executors.newScheduledThreadPool(1);
         this.taskExecutor = Executors.newFixedThreadPool(tasksThreadPoolSize);
     }
 

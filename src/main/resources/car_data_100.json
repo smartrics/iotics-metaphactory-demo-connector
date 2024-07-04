@@ -8,7 +8,6 @@
         "model": "GLE",
         "identifier": "C5HS5A",
         "owner": "Paul Clark",
-        "isOperational": false,
         "location": {
             "latitude": 51.513434,
             "longitude": -0.157231
@@ -23,7 +22,6 @@
         "model": "Ascent",
         "identifier": "0QCV7C",
         "owner": "Thomas Young",
-        "isOperational": false,
         "location": {
             "latitude": 51.475479,
             "longitude": -0.104007
@@ -38,7 +36,6 @@
         "model": "Mustang",
         "identifier": "V3VPL1",
         "owner": "Samantha Carter",
-        "isOperational": true,
         "location": {
             "latitude": 51.507644,
             "longitude": -0.127845
@@ -53,7 +50,6 @@
         "model": "Camry",
         "identifier": "IZMVP8",
         "owner": "Jessica Wright",
-        "isOperational": true,
         "location": {
             "latitude": 51.542414,
             "longitude": -0.056834
@@ -68,7 +64,6 @@
         "model": "7 Series",
         "identifier": "GD3VLX",
         "owner": "Samantha Carter",
-        "isOperational": false,
         "location": {
             "latitude": 51.404762,
             "longitude": -0.236021
@@ -83,7 +78,6 @@
         "model": "S-Class",
         "identifier": "8GP0U4",
         "owner": "Daniel Taylor",
-        "isOperational": true,
         "location": {
             "latitude": 51.614159,
             "longitude": -0.095033
@@ -98,7 +92,6 @@
         "model": "Sentra",
         "identifier": "6MX73A",
         "owner": "Daniel Taylor",
-        "isOperational": true,
         "location": {
             "latitude": 51.670062,
             "longitude": -0.10263
@@ -113,7 +106,6 @@
         "model": "Elantra",
         "identifier": "25JYOI",
         "owner": "Michelle Perez",
-        "isOperational": true,
         "location": {
             "latitude": 51.519935,
             "longitude": -0.08723
@@ -128,7 +120,6 @@
         "model": "500",
         "identifier": "6FHISM",
         "owner": "Gary Phillips",
-        "isOperational": true,
         "location": {
             "latitude": 51.606042,
             "longitude": -0.128885
@@ -143,7 +134,6 @@
         "model": "Rogue",
         "identifier": "RGIMO7",
         "owner": "Charles King",
-        "isOperational": true,
         "location": {
             "latitude": 51.487737,
             "longitude": -0.122072
@@ -158,7 +148,6 @@
         "model": "Palisade",
         "identifier": "Y76PVY",
         "owner": "Samantha Carter",
-        "isOperational": false,
         "location": {
             "latitude": 51.509725,
             "longitude": -0.143192
@@ -173,7 +162,6 @@
         "model": "Ascent",
         "identifier": "GNR3IC",
         "owner": "Kevin Turner",
-        "isOperational": true,
         "location": {
             "latitude": 51.607504,
             "longitude": -0.126854
@@ -188,7 +176,6 @@
         "model": "4C",
         "identifier": "MH442I",
         "owner": "Jane Doe",
-        "isOperational": true,
         "location": {
             "latitude": 51.45855,
             "longitude": -0.408661
@@ -203,7 +190,6 @@
         "model": "Tucson",
         "identifier": "4HMVTN",
         "owner": "Adam Ward",
-        "isOperational": true,
         "location": {
             "latitude": 51.473623,
             "longitude": -0.125829
@@ -218,7 +204,6 @@
         "model": "Doblo",
         "identifier": "YFS71E",
         "owner": "Emily Hernandez",
-        "isOperational": false,
         "location": {
             "latitude": 51.684771,
             "longitude": -0.173537
@@ -233,7 +218,6 @@
         "model": "Prius",
         "identifier": "URFM5M",
         "owner": "Alice Johnson",
-        "isOperational": false,
         "location": {
             "latitude": 51.50338,
             "longitude": -0.134434
@@ -248,7 +232,6 @@
         "model": "GLE",
         "identifier": "AVHJG2",
         "owner": "Thomas Young",
-        "isOperational": true,
         "location": {
             "latitude": 51.510979,
             "longitude": -0.341971
@@ -263,7 +246,6 @@
         "model": "Outback",
         "identifier": "G9RTZ8",
         "owner": "Robert Garcia",
-        "isOperational": true,
         "location": {
             "latitude": 51.517491,
             "longitude": 0.03649
@@ -278,7 +260,6 @@
         "model": "Doblo",
         "identifier": "ZT7CHM",
         "owner": "Laura Allen",
-        "isOperational": true,
         "location": {
             "latitude": 51.627912,
             "longitude": -0.014298
@@ -293,7 +274,6 @@
         "model": "3 Series",
         "identifier": "2B70I1",
         "owner": "Brandon Howard",
-        "isOperational": false,
         "location": {
             "latitude": 51.48729,
             "longitude": 0.222768
@@ -308,7 +288,6 @@
         "model": "Fiesta",
         "identifier": "AVCH5S",
         "owner": "Kevin Turner",
-        "isOperational": false,
         "location": {
             "latitude": 51.583653,
             "longitude": -0.388375
@@ -323,7 +302,6 @@
         "model": "RAV4",
         "identifier": "T1A9MT",
         "owner": "Sarah Lewis",
-        "isOperational": false,
         "location": {
             "latitude": 51.318658,
             "longitude": -0.271962
@@ -338,7 +316,6 @@
         "model": "Malibu",
         "identifier": "WFNQLK",
         "owner": "Paul Clark",
-        "isOperational": true,
         "location": {
             "latitude": 51.715556,
             "longitude": -0.037268
@@ -353,7 +330,6 @@
         "model": "GLC",
         "identifier": "394G4M",
         "owner": "Alice Johnson",
-        "isOperational": false,
         "location": {
             "latitude": 51.471823,
             "longitude": 0.031661
@@ -368,7 +344,6 @@
         "model": "Soul",
         "identifier": "KMXABH",
         "owner": "Gary Phillips",
-        "isOperational": false,
         "location": {
             "latitude": 51.491313,
             "longitude": -0.121051
@@ -383,7 +358,6 @@
         "model": "GLE",
         "identifier": "GNMKEF",
         "owner": "Laura Peterson",
-        "isOperational": false,
         "location": {
             "latitude": 51.488663,
             "longitude": -0.12476
@@ -398,7 +372,6 @@
         "model": "Giulia",
         "identifier": "6QMUGI",
         "owner": "Robert Garcia",
-        "isOperational": true,
         "location": {
             "latitude": 51.610592,
             "longitude": 0.037222
@@ -413,7 +386,6 @@
         "model": "A3",
         "identifier": "SQNCLD",
         "owner": "Lisa Campbell",
-        "isOperational": true,
         "location": {
             "latitude": 51.410661,
             "longitude": 0.033039
@@ -428,7 +400,6 @@
         "model": "E-Class",
         "identifier": "T9GZVF",
         "owner": "Paul Clark",
-        "isOperational": false,
         "location": {
             "latitude": 51.404123,
             "longitude": -0.189694
@@ -443,7 +414,6 @@
         "model": "F-150",
         "identifier": "505WKX",
         "owner": "Laura Peterson",
-        "isOperational": false,
         "location": {
             "latitude": 51.576572,
             "longitude": 0.012633
@@ -458,7 +428,6 @@
         "model": "Elantra",
         "identifier": "UXJTHE",
         "owner": "John Smith",
-        "isOperational": false,
         "location": {
             "latitude": 51.534108,
             "longitude": 0.168852
@@ -473,7 +442,6 @@
         "model": "Tahoe",
         "identifier": "5KD8QU",
         "owner": "Susan Miller",
-        "isOperational": true,
         "location": {
             "latitude": 51.538731,
             "longitude": -0.074353
@@ -488,7 +456,6 @@
         "model": "GTV",
         "identifier": "SPMEHO",
         "owner": "Brian Edwards",
-        "isOperational": false,
         "location": {
             "latitude": 51.542949,
             "longitude": -0.103867
@@ -503,7 +470,6 @@
         "model": "Corolla",
         "identifier": "JOB3E9",
         "owner": "Sarah Lewis",
-        "isOperational": true,
         "location": {
             "latitude": 51.560172,
             "longitude": 0.029178
@@ -518,7 +484,6 @@
         "model": "Corolla",
         "identifier": "Q5MO0T",
         "owner": "Sarah Lewis",
-        "isOperational": false,
         "location": {
             "latitude": 51.615994,
             "longitude": 0.078428
@@ -533,7 +498,6 @@
         "model": "Sorento",
         "identifier": "QRZJKX",
         "owner": "Matthew Lopez",
-        "isOperational": false,
         "location": {
             "latitude": 51.517146,
             "longitude": -0.216322
@@ -548,7 +512,6 @@
         "model": "Kona",
         "identifier": "9XWAJ9",
         "owner": "Alice Johnson",
-        "isOperational": true,
         "location": {
             "latitude": 51.347817,
             "longitude": 0.041896
@@ -563,7 +526,6 @@
         "model": "Odyssey",
         "identifier": "YFYKG2",
         "owner": "Patricia Brown",
-        "isOperational": false,
         "location": {
             "latitude": 51.511795,
             "longitude": -0.108451
@@ -578,7 +540,6 @@
         "model": "Suburban",
         "identifier": "CAW828",
         "owner": "Daniel Taylor",
-        "isOperational": true,
         "location": {
             "latitude": 51.36841,
             "longitude": -0.158431
@@ -593,7 +554,6 @@
         "model": "Crosstrek",
         "identifier": "JEUF1Y",
         "owner": "Samantha Carter",
-        "isOperational": false,
         "location": {
             "latitude": 51.513437,
             "longitude": -0.180453
@@ -608,7 +568,6 @@
         "model": "Passat",
         "identifier": "KGDFB9",
         "owner": "Brandon Howard",
-        "isOperational": true,
         "location": {
             "latitude": 51.404578,
             "longitude": -0.053525
@@ -623,7 +582,6 @@
         "model": "RAV4",
         "identifier": "WGFDMZ",
         "owner": "Jessica Wright",
-        "isOperational": false,
         "location": {
             "latitude": 51.410383,
             "longitude": 0.028043
@@ -638,7 +596,6 @@
         "model": "Pilot",
         "identifier": "IN9QPU",
         "owner": "Jason Roberts",
-        "isOperational": false,
         "location": {
             "latitude": 51.459483,
             "longitude": -0.009158
@@ -653,7 +610,6 @@
         "model": "Accord",
         "identifier": "YJM649",
         "owner": "Lisa Campbell",
-        "isOperational": false,
         "location": {
             "latitude": 51.532758,
             "longitude": 0.209868
@@ -668,7 +624,6 @@
         "model": "Impala",
         "identifier": "6M4EC3",
         "owner": "Thomas Young",
-        "isOperational": false,
         "location": {
             "latitude": 51.405392,
             "longitude": -0.183853
@@ -683,7 +638,6 @@
         "model": "Escape",
         "identifier": "N4VS6E",
         "owner": "Mark Hall",
-        "isOperational": false,
         "location": {
             "latitude": 51.601896,
             "longitude": -0.027915
@@ -698,7 +652,6 @@
         "model": "Maxima",
         "identifier": "LK11AG",
         "owner": "Emily Hernandez",
-        "isOperational": false,
         "location": {
             "latitude": 51.605179,
             "longitude": -0.295192
@@ -713,7 +666,6 @@
         "model": "Q5",
         "identifier": "AU4WL7",
         "owner": "Deborah Parker",
-        "isOperational": true,
         "location": {
             "latitude": 51.522889,
             "longitude": -0.442512
@@ -728,7 +680,6 @@
         "model": "Ascent",
         "identifier": "7LUABF",
         "owner": "Angela Green",
-        "isOperational": false,
         "location": {
             "latitude": 51.489089,
             "longitude": -0.30558
@@ -743,7 +694,6 @@
         "model": "4C",
         "identifier": "ZZSRE8",
         "owner": "Emma Torres",
-        "isOperational": false,
         "location": {
             "latitude": 51.696224,
             "longitude": -0.240759
@@ -758,7 +708,6 @@
         "model": "500",
         "identifier": "HGSQVL",
         "owner": "Susan Miller",
-        "isOperational": true,
         "location": {
             "latitude": 51.388014,
             "longitude": 0.136314
@@ -773,7 +722,6 @@
         "model": "Suburban",
         "identifier": "PKY1PD",
         "owner": "Andrew Adams",
-        "isOperational": false,
         "location": {
             "latitude": 51.309833,
             "longitude": -0.158079
@@ -788,7 +736,6 @@
         "model": "Murano",
         "identifier": "LWKPZP",
         "owner": "Susan Miller",
-        "isOperational": true,
         "location": {
             "latitude": 51.498041,
             "longitude": -0.037468
@@ -803,7 +750,6 @@
         "model": "Silverado",
         "identifier": "APZRAS",
         "owner": "Laura Peterson",
-        "isOperational": true,
         "location": {
             "latitude": 51.571145,
             "longitude": -0.320421
@@ -818,7 +764,6 @@
         "model": "7 Series",
         "identifier": "JQJATM",
         "owner": "Jason Roberts",
-        "isOperational": true,
         "location": {
             "latitude": 51.462526,
             "longitude": 0.067868
@@ -833,7 +778,6 @@
         "model": "Maxima",
         "identifier": "2PI7M7",
         "owner": "Justin Foster",
-        "isOperational": false,
         "location": {
             "latitude": 51.35052,
             "longitude": -0.266271
@@ -848,7 +792,6 @@
         "model": "Fiesta",
         "identifier": "RTOJKT",
         "owner": "Deborah Parker",
-        "isOperational": true,
         "location": {
             "latitude": 51.455557,
             "longitude": -0.095909
@@ -863,7 +806,6 @@
         "model": "Murano",
         "identifier": "UNSBTM",
         "owner": "Ryan Cooper",
-        "isOperational": false,
         "location": {
             "latitude": 51.502129,
             "longitude": -0.139137
@@ -878,7 +820,6 @@
         "model": "Punto",
         "identifier": "6155OS",
         "owner": "Daniel Taylor",
-        "isOperational": true,
         "location": {
             "latitude": 51.581836,
             "longitude": -0.155451
@@ -893,7 +834,6 @@
         "model": "Telluride",
         "identifier": "919DO0",
         "owner": "Robert Garcia",
-        "isOperational": false,
         "location": {
             "latitude": 51.41835,
             "longitude": 0.151898
@@ -908,7 +848,6 @@
         "model": "Soul",
         "identifier": "IFV472",
         "owner": "Jason Roberts",
-        "isOperational": true,
         "location": {
             "latitude": 51.61887,
             "longitude": -0.056665
@@ -923,7 +862,6 @@
         "model": "Mustang",
         "identifier": "6N7UUL",
         "owner": "Deborah Parker",
-        "isOperational": true,
         "location": {
             "latitude": 51.660123,
             "longitude": -0.051456
@@ -938,7 +876,6 @@
         "model": "4C",
         "identifier": "A9RTEC",
         "owner": "Charles King",
-        "isOperational": true,
         "location": {
             "latitude": 51.667412,
             "longitude": -0.282815
@@ -953,7 +890,6 @@
         "model": "Altima",
         "identifier": "2KNCQ8",
         "owner": "Paul Clark",
-        "isOperational": false,
         "location": {
             "latitude": 51.517246,
             "longitude": -0.057557
@@ -968,7 +904,6 @@
         "model": "124 Spider",
         "identifier": "QD9IJJ",
         "owner": "James Rodriguez",
-        "isOperational": true,
         "location": {
             "latitude": 51.496068,
             "longitude": -0.211854
@@ -983,7 +918,6 @@
         "model": "Sorento",
         "identifier": "0VD6UY",
         "owner": "Emily Hernandez",
-        "isOperational": true,
         "location": {
             "latitude": 51.430732,
             "longitude": -0.35296
@@ -998,7 +932,6 @@
         "model": "MiTo",
         "identifier": "MP22T6",
         "owner": "Susan Miller",
-        "isOperational": false,
         "location": {
             "latitude": 51.651916,
             "longitude": -0.215334
@@ -1013,7 +946,6 @@
         "model": "Altima",
         "identifier": "FA8YLL",
         "owner": "Samantha Carter",
-        "isOperational": false,
         "location": {
             "latitude": 51.340911,
             "longitude": 0.059282
@@ -1028,7 +960,6 @@
         "model": "Mustang",
         "identifier": "8VZBJA",
         "owner": "Gary Phillips",
-        "isOperational": true,
         "location": {
             "latitude": 51.438555,
             "longitude": -0.068298
@@ -1043,7 +974,6 @@
         "model": "GTV",
         "identifier": "LJVRGG",
         "owner": "Rebecca Mitchell",
-        "isOperational": false,
         "location": {
             "latitude": 51.595356,
             "longitude": 0.073884
@@ -1058,7 +988,6 @@
         "model": "Soul",
         "identifier": "5F8XSJ",
         "owner": "Emily Hernandez",
-        "isOperational": true,
         "location": {
             "latitude": 51.503478,
             "longitude": -0.423035
@@ -1073,7 +1002,6 @@
         "model": "Pilot",
         "identifier": "WJ3UOR",
         "owner": "Mark Hall",
-        "isOperational": true,
         "location": {
             "latitude": 51.481023,
             "longitude": -0.476098
@@ -1088,7 +1016,6 @@
         "model": "Jetta",
         "identifier": "SZ0POC",
         "owner": "Melissa Baker",
-        "isOperational": false,
         "location": {
             "latitude": 51.370742,
             "longitude": -0.068458
@@ -1103,7 +1030,6 @@
         "model": "X5",
         "identifier": "7T0LNM",
         "owner": "Karen Walker",
-        "isOperational": false,
         "location": {
             "latitude": 51.669013,
             "longitude": -0.082922
@@ -1118,7 +1044,6 @@
         "model": "Q5",
         "identifier": "FQA9UX",
         "owner": "Chris Evans",
-        "isOperational": true,
         "location": {
             "latitude": 51.347217,
             "longitude": 0.051502
@@ -1133,7 +1058,6 @@
         "model": "5 Series",
         "identifier": "PQPU0G",
         "owner": "Chris Evans",
-        "isOperational": false,
         "location": {
             "latitude": 51.669651,
             "longitude": -0.039272
@@ -1148,7 +1072,6 @@
         "model": "Sportage",
         "identifier": "N6A4WP",
         "owner": "Laura Peterson",
-        "isOperational": false,
         "location": {
             "latitude": 51.376335,
             "longitude": 0.001787
@@ -1163,7 +1086,6 @@
         "model": "Tahoe",
         "identifier": "U0KA2S",
         "owner": "Linda Davis",
-        "isOperational": false,
         "location": {
             "latitude": 51.415357,
             "longitude": -0.139709
@@ -1178,7 +1100,6 @@
         "model": "Jetta",
         "identifier": "NYO4MP",
         "owner": "Ashley Reed",
-        "isOperational": true,
         "location": {
             "latitude": 51.492073,
             "longitude": -0.217425
@@ -1193,7 +1114,6 @@
         "model": "Stelvio",
         "identifier": "9PZ3X0",
         "owner": "Joshua Nelson",
-        "isOperational": true,
         "location": {
             "latitude": 51.491859,
             "longitude": -0.243542
@@ -1208,7 +1128,6 @@
         "model": "Corolla",
         "identifier": "H8INBA",
         "owner": "Steven Hill",
-        "isOperational": false,
         "location": {
             "latitude": 51.492445,
             "longitude": -0.082491
@@ -1223,7 +1142,6 @@
         "model": "Malibu",
         "identifier": "GT73UK",
         "owner": "Rebecca Mitchell",
-        "isOperational": false,
         "location": {
             "latitude": 51.557926,
             "longitude": -0.113462
@@ -1238,7 +1156,6 @@
         "model": "E-Class",
         "identifier": "ODLJNP",
         "owner": "Chris Evans",
-        "isOperational": true,
         "location": {
             "latitude": 51.471387,
             "longitude": -0.213508
@@ -1253,7 +1170,6 @@
         "model": "GLE",
         "identifier": "KJVXRC",
         "owner": "Gary Phillips",
-        "isOperational": false,
         "location": {
             "latitude": 51.568799,
             "longitude": -0.275456
@@ -1268,7 +1184,6 @@
         "model": "Telluride",
         "identifier": "MR4K39",
         "owner": "Matthew Lopez",
-        "isOperational": true,
         "location": {
             "latitude": 51.495616,
             "longitude": -0.004913
@@ -1283,7 +1198,6 @@
         "model": "F-150",
         "identifier": "6F95V1",
         "owner": "Michelle Perez",
-        "isOperational": false,
         "location": {
             "latitude": 51.553886,
             "longitude": 0.010186
@@ -1298,7 +1212,6 @@
         "model": "Camry",
         "identifier": "THLQO2",
         "owner": "Emma Torres",
-        "isOperational": true,
         "location": {
             "latitude": 51.453874,
             "longitude": -0.436264
@@ -1313,7 +1226,6 @@
         "model": "Mustang",
         "identifier": "54GHRT",
         "owner": "Emily Powell",
-        "isOperational": false,
         "location": {
             "latitude": 51.426581,
             "longitude": -0.163501
@@ -1328,7 +1240,6 @@
         "model": "Q7",
         "identifier": "VSXRAO",
         "owner": "Daniel Taylor",
-        "isOperational": true,
         "location": {
             "latitude": 51.497744,
             "longitude": -0.126275
@@ -1343,7 +1254,6 @@
         "model": "124 Spider",
         "identifier": "1GBRCK",
         "owner": "Eric Morris",
-        "isOperational": true,
         "location": {
             "latitude": 51.457147,
             "longitude": -0.397439
@@ -1358,7 +1268,6 @@
         "model": "Sentra",
         "identifier": "2LANMF",
         "owner": "Linda Davis",
-        "isOperational": false,
         "location": {
             "latitude": 51.553119,
             "longitude": -0.125458
@@ -1373,7 +1282,6 @@
         "model": "Golf",
         "identifier": "UKF02A",
         "owner": "Brandon Howard",
-        "isOperational": true,
         "location": {
             "latitude": 51.500175,
             "longitude": 0.008231
@@ -1388,7 +1296,6 @@
         "model": "Forester",
         "identifier": "EY13S4",
         "owner": "Jane Doe",
-        "isOperational": false,
         "location": {
             "latitude": 51.373511,
             "longitude": -0.212866
@@ -1403,7 +1310,6 @@
         "model": "Q7",
         "identifier": "MA2DC9",
         "owner": "Ryan Cooper",
-        "isOperational": false,
         "location": {
             "latitude": 51.663978,
             "longitude": -0.059521
@@ -1418,7 +1324,6 @@
         "model": "Ascent",
         "identifier": "HLH768",
         "owner": "Susan Miller",
-        "isOperational": true,
         "location": {
             "latitude": 51.702632,
             "longitude": 0.012568
@@ -1433,7 +1338,6 @@
         "model": "Passat",
         "identifier": "3ACRX0",
         "owner": "Kevin Turner",
-        "isOperational": true,
         "location": {
             "latitude": 51.456923,
             "longitude": -0.342987
@@ -1448,7 +1352,6 @@
         "model": "GLC",
         "identifier": "US2C1Q",
         "owner": "Deborah Parker",
-        "isOperational": true,
         "location": {
             "latitude": 51.567032,
             "longitude": -0.089042
@@ -1463,7 +1366,6 @@
         "model": "Rogue",
         "identifier": "VR1OMN",
         "owner": "David Martinez",
-        "isOperational": false,
         "location": {
             "latitude": 51.663302,
             "longitude": -0.060956
@@ -1478,7 +1380,6 @@
         "model": "Jetta",
         "identifier": "LKH6HD",
         "owner": "Deborah Parker",
-        "isOperational": false,
         "location": {
             "latitude": 51.431795,
             "longitude": 0.094838
@@ -1493,7 +1394,6 @@
         "model": "Malibu",
         "identifier": "4135JP",
         "owner": "John Smith",
-        "isOperational": false,
         "location": {
             "latitude": 51.384284,
             "longitude": 0.00443

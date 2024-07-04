@@ -33,8 +33,6 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
     private String identifier;
     @StringLiteralProperty(iri = SCHEMA_PREFIX + "/givenName")
     private String owner;
-    @LiteralProperty(iri = ONT_PREFIX + "/isOperational", dataType = XsdDatatype.boolean_)
-    private Boolean isOperational;
     @Location
     private GeoLocation location;
 
@@ -76,7 +74,6 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
         private String model;
         private String identifier;
         private String owner;
-        private Boolean isOperational;
         private GeoLocation location;
         private Identity myIdentity;
         private IoticsApi api;
@@ -129,11 +126,6 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
             return this;
         }
 
-        public CarDigitalTwinBuilder withIsOperational(Boolean isOperational) {
-            this.isOperational = isOperational;
-            return this;
-        }
-
         public CarDigitalTwinBuilder withLocation(GeoLocation location) {
             this.location = location;
             return this;
@@ -159,7 +151,6 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
             carDigitalTwin.label = this.label;
             carDigitalTwin.identifier = this.identifier;
             carDigitalTwin.owner = this.owner;
-            carDigitalTwin.isOperational = this.isOperational;
             carDigitalTwin.comment = this.comment;
             carDigitalTwin.unit = this.unit;
             carDigitalTwin.location = this.location;
