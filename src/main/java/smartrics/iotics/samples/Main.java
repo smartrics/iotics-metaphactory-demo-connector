@@ -81,8 +81,6 @@ public class Main {
         if (initialFile.canRead()) {
             try (InputStream inputStream = new FileInputStream(initialFile)) {
                 loader.loadCarData(shareOnly, inputStream);
-            } finally {
-                loader.shutdown();
             }
         } else {
             throw new IllegalArgumentException("unable to access " + initialFile.getAbsolutePath());

@@ -1,13 +1,15 @@
 package smartrics.iotics.samples.cars;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class MovingCar {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MovingCar.class);
+
     private final double speedKmh;
     private final double maxDistance;
     private final Random rand;
@@ -21,7 +23,7 @@ public class MovingCar {
     private OperationalStatus operationalStatus;
 
 
-    public MovingCar(double initialLat, double initialLon, int updatePeriodSec) {
+    public MovingCar(double initialLat, double initialLon) {
         this.rand = new Random();
         this.currentLat = initialLat;
         this.currentLon = initialLon;
@@ -31,15 +33,12 @@ public class MovingCar {
         this.speedKmh = rand.nextDouble(45.0, 55.0);
         this.direction = rand.nextDouble() * 2 * Math.PI; // Random direction in radians
         this.lastUpdateTime = LocalDateTime.now();
-        update();
-        try(ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1)) {
-            scheduler.scheduleAtFixedRate(this::update, 0, updatePeriodSec, TimeUnit.SECONDS);
-        }
     }
 
-    private void update() {
+    public void update() {
         updatePosition();
         updateOperationalStatus();
+        LOGGER.info("{} {}", currentOperationalStatus(), currentLocationData());
     }
 
     public OperationalStatus currentOperationalStatus() {
@@ -48,22 +47,6 @@ public class MovingCar {
 
     public LocationData currentLocationData() {
         return locationData;
-    }
-
-    public double latitude() {
-        return currentLat;
-    }
-
-    public double longitude() {
-        return currentLon;
-    }
-
-    public double direction() {
-        return direction;
-    }
-
-    public double speedKmk() {
-        return speedKmh;
     }
 
     private void updateOperationalStatus() {

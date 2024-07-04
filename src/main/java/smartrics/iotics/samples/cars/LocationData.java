@@ -35,4 +35,13 @@ public class LocationData {
     public double direction() {
         return direction;
     }
+
+    @Override
+    public String toString() {
+        return "LocationData{" +
+                "wktLiteral='" + wktLiteral + '\'' +
+                ", speed=" + speed +
+                ", direction=" + direction +
+                '}';
+    }
 }

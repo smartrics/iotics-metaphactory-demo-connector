@@ -63,6 +63,10 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
         return this;
     }
 
+    public void updateState() {
+        this.movingCar.update();
+    }
+
     public static final class CarDigitalTwinBuilder {
         private Integer unit;
         private String comment;
@@ -77,7 +81,6 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
         private Identity myIdentity;
         private IoticsApi api;
         private IdentityManager sim;
-        private Integer updatePeriodSec;
 
         private CarDigitalTwinBuilder() {
         }
@@ -93,11 +96,6 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
 
         public CarDigitalTwinBuilder withComment(String comment) {
             this.comment = comment;
-            return this;
-        }
-
-        public CarDigitalTwinBuilder withUpdatePeriodSec(Integer updatePeriodSec) {
-            this.updatePeriodSec = updatePeriodSec;
             return this;
         }
 
@@ -168,7 +166,8 @@ public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, M
             carDigitalTwin.manufacturerName = this.manufacturerName;
             carDigitalTwin.colour = this.colour;
             carDigitalTwin.model = this.model;
-            carDigitalTwin.movingCar = new MovingCar(this.location.getLat(), this.location.getLon(), this.updatePeriodSec);
+            carDigitalTwin.movingCar = new MovingCar(this.location.getLat(), this.location.getLon());
+            carDigitalTwin.movingCar.update();
             return carDigitalTwin;
         }
     }

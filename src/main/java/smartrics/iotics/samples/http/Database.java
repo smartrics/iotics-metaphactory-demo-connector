@@ -51,9 +51,9 @@ public class Database {
             });
             try {
                 conn.add(model);
-                LOGGER.warn("added " + model);
+                LOGGER.debug("added {}", model);
             } catch (Exception e) {
-                LOGGER.warn("unable to remove model for resource " + model);
+                LOGGER.warn("unable to remove model for resource {}", model);
             }
         }
     }

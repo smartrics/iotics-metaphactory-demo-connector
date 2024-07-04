@@ -27,23 +27,23 @@ import java.util.stream.Collectors;
 public class CarDigitalTwinLoader {
     private static final Logger LOGGER = LoggerFactory.getLogger(CarDigitalTwinLoader.class);
 
-    private final ExecutorService executorService;
     private final Gson gson;
     private final EventBus eventBus;
-    private final Executor handlersExecutor;
+    private final ExecutorService loaderExecutor;
 
     private final AtomicInteger counter = new AtomicInteger(0);
     private final Database database;
     private final IoticsApi api;
     private final SimpleIdentityManager sim;
-    private final RandomScheduler<Void> scheduler;
+    private final RandomScheduler<Void> sharingScheduler;
+    private final ScheduledExecutorService scheduler;
 
     public CarDigitalTwinLoader(EventBus eventBus, Database database, IoticsApi api, SimpleIdentityManager sim, int sharePeriodSec) {
-        this.executorService = Executors.newSingleThreadExecutor();
-        this.handlersExecutor = Executors.newCachedThreadPool();
-        this.scheduler = new RandomScheduler<>(sharePeriodSec, sharePeriodSec / 2, 8);
+        this.loaderExecutor = Executors.newCachedThreadPool();
+        this.scheduler = Executors.newScheduledThreadPool(16);
+        this.sharingScheduler = new RandomScheduler<>(scheduler, sharePeriodSec, sharePeriodSec / 2, 8);
         this.gson = new GsonBuilder()
-                .registerTypeAdapter(CarDigitalTwin.class, new CarDigitalTwinDeserializer(api, sim, sharePeriodSec))
+                .registerTypeAdapter(CarDigitalTwin.class, new CarDigitalTwinDeserializer(api, sim))
                 .registerTypeAdapter(GeoLocation.class, new GeoLocationDeserializer()).create();
         this.eventBus = eventBus;
         this.eventBus.register(this);
@@ -53,7 +53,8 @@ public class CarDigitalTwinLoader {
     }
 
     public void shutdown() {
-        executorService.shutdown();
+        loaderExecutor.shutdown();
+        scheduler.shutdown();
     }
 
     public void loadCarData(boolean shareOnly, InputStream inputStream) throws IOException {
@@ -61,7 +62,7 @@ public class CarDigitalTwinLoader {
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             jsonData = bufferedReader.lines().collect(Collectors.joining("\n"));
         }
-        executorService.submit(() -> {
+        loaderExecutor.execute(() -> {
             try (JsonReader reader = new JsonReader(new StringReader(jsonData))) {
                 reader.beginArray();
                 while (reader.hasNext()) {
@@ -89,7 +90,9 @@ public class CarDigitalTwinLoader {
         Consumer<Void> onSuccess = unused -> LOGGER.info("Successfully scheduled sharing [did={}]", car.getMyIdentity().did());
         Consumer<Throwable> onError = throwable -> LOGGER.info("Exception sharing [did={}]", car.getMyIdentity().did(), throwable);
 
-        retrieveValueIDs(car.getMyIdentity().did(), bindings -> scheduler.start(() -> {
+        retrieveValueIDs(car.getMyIdentity().did(), bindings -> sharingScheduler.start(() -> {
+            car.updateState();
+
             OperationalStatus opStatus = car.getOpStatus();
             List<Binding> status = Binding.filter(bindings, "status");
             database.set(Sem.createStatusModel(car.getMyIdentity().did(), status, opStatus));
@@ -121,7 +124,7 @@ public class CarDigitalTwinLoader {
                 eventBus.post(new CarCreateEvent(car));
             }
 
-        }, handlersExecutor);
+        }, this.loaderExecutor);
     }
 
     private void retrieveValueIDs(String did, Consumer<List<Binding>> handler) {

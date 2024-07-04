@@ -14,11 +14,11 @@ public class RandomScheduler<T> {
     private final int variance;
     private volatile boolean running = true;
 
-    public RandomScheduler(int period, int variance, int threadPoolSize) {
+    public RandomScheduler(ScheduledExecutorService scheduler, int period, int variance, int tasksThreadPoolSize) {
         this.period = period;
         this.variance = variance;
-        this.scheduler = Executors.newScheduledThreadPool(1);
-        this.taskExecutor = Executors.newFixedThreadPool(threadPoolSize);
+        this.scheduler = scheduler;
+        this.taskExecutor = Executors.newFixedThreadPool(tasksThreadPoolSize);
     }
 
     public void start(Callable<T> task, Consumer<T> onSuccess, Consumer<Throwable> onError) {
@@ -27,7 +27,6 @@ public class RandomScheduler<T> {
 
     public void stop() {
         running = false;
-        scheduler.shutdown();
         taskExecutor.shutdown();
     }
 

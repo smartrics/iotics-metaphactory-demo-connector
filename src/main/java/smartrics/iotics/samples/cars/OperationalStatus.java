@@ -20,4 +20,11 @@ public class OperationalStatus {
     public Boolean opStatus() {
         return opStatus;
     }
+
+    @Override
+    public String toString() {
+        return "OperationalStatus{" +
+                "opStatus=" + opStatus +
+                '}';
+    }
 }
