@@ -1,6 +1,7 @@
 package smartrics.iotics.samples.http;
 
 import io.vertx.core.http.HttpServerResponse;
+import org.eclipse.rdf4j.query.resultio.TupleQueryResultFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.vertx.ext.web.RoutingContext;
@@ -133,16 +134,16 @@ public class Database {
 
 
     private Optional<TupleQueryResultWriterFactory> getTupleQueryResultWriterFactory(String acceptHeader) {
-        if ("text/csv".equals(acceptHeader)) {
-            return Optional.of(new SPARQLResultsCSVWriterFactory());
-        } else if ("application/sparql-results+xml".equals(acceptHeader)) {
-            return Optional.of(new SPARQLResultsXMLWriterFactory());
-        } else if ("application/sparql-results+json".equals(acceptHeader)) {
-            return Optional.of(new SPARQLResultsJSONWriterFactory());
-        } else if ("text/tab-separated-values".equals(acceptHeader)) {
-            return Optional.of(new SPARQLResultsTSVWriterFactory());
+        Optional<FileFormat> off = ContentTypesMap.get(acceptHeader);
+        if(off.isEmpty()) {
+            return Optional.empty();
         }
-        return Optional.empty();
+        FileFormat ff = off.get();
+        if(TupleQueryResultFormat.SPARQL.equals(ff)) return Optional.of(new SPARQLResultsXMLWriterFactory());
+        else if (TupleQueryResultFormat.JSON.equals(ff)) return Optional.of(new SPARQLResultsJSONWriterFactory());
+        else if (TupleQueryResultFormat.CSV.equals(ff)) return Optional.of(new SPARQLResultsCSVWriterFactory());
+        else if (TupleQueryResultFormat.TSV.equals(ff)) return Optional.of(new SPARQLResultsTSVWriterFactory());
+        else return Optional.empty();
     }
 
 }
