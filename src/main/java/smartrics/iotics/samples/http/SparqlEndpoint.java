@@ -18,9 +18,7 @@ import org.slf4j.LoggerFactory;
 import java.net.URLDecoder;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static smartrics.iotics.samples.http.ContentTypesMap.mimeFor;
@@ -80,22 +78,24 @@ public class SparqlEndpoint extends AbstractVerticle {
     }
 
     private static @NotNull FileFormat getValidAcceptedResultType(HttpServerRequest request) {
-        String accepted = request.getHeader("Accept");
-        if (accepted != null) {
-            // TODO: better support multiple Accept with quality flag
-            accepted = accepted.split(",")[0].trim();
-            accepted = accepted.split(";")[0];
+        String acceptHeader = request.getHeader("Accept");
+        String[] mediaRanges = acceptHeader.split(",");
+
+        List<MediaType> mediaTypes = Arrays.stream(mediaRanges)
+                .map(String::trim)
+                .map(MediaType::new)
+                .sorted(Comparator.comparingDouble(MediaType::getQuality).reversed())
+                .toList();
+
+        for (MediaType mediaType : mediaTypes) {
+            String type = mediaType.getType();
+            Optional<FileFormat> fileFormat = ContentTypesMap.get(type);
+            if (fileFormat.isPresent()) {
+                return fileFormat.get();
+            }
         }
 
-        FileFormat mappedAccepted = ContentTypesMap.UNRECOGNISED;
-        if (accepted != null && !accepted.equals("*/*")) {
-            mappedAccepted = ContentTypesMap.get(accepted, ContentTypesMap.UNRECOGNISED);
-        }
-
-        if (mappedAccepted.equals(ContentTypesMap.UNRECOGNISED)) {
-            throw new ValidationException(400, ErrorMessage.toJson("Unsupported response mime type: " + accepted));
-        }
-        return mappedAccepted;
+        throw new ValidationException(400, ErrorMessage.toJson("Unsupported response mime type: " + acceptHeader));
     }
 
     public Router createRouter(Database database) {
