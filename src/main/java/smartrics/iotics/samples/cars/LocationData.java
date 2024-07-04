@@ -19,7 +19,7 @@ public class LocationData {
     private String comment = "Car Location Data";
 
     public LocationData(double lat, double lon, double speed, double direction) {
-        this.wktLiteral = "POINT("+ lat + " " + lon + ")";
+        this.wktLiteral = "POINT("+ lon + " " + lat + ")";
         this.direction = direction;
         this.speed = speed;
     }
