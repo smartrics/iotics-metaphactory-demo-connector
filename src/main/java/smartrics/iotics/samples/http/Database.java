@@ -2,6 +2,7 @@ package smartrics.iotics.samples.http;
 
 import io.vertx.core.http.HttpServerResponse;
 import org.eclipse.rdf4j.query.resultio.TupleQueryResultFormat;
+import org.eclipse.rdf4j.query.resultio.TupleQueryResultWriterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.vertx.ext.web.RoutingContext;
@@ -110,17 +111,18 @@ public class Database {
             FileFormat format = ContentTypesMap.get(acceptHeader, UNRECOGNISED);
             if (format.equals(UNRECOGNISED)) {
                 context.response().setStatusCode(400).end(ErrorMessage.toJson("unrecognised or invalid accept header"));
-            } else {
+            } else if (format instanceof RDFFormat) {
                 Rio.write(model, out, (RDFFormat) format);
                 context.response()
                         .putHeader("content-type", format.getDefaultMIMEType())
                         .end(out.toString());
+            } else{
+                context.response().setStatusCode(400).end(ErrorMessage.toJson("Unsupported format type for graph query: " + acceptHeader));
             }
         } catch (Exception e) {
             context.response().setStatusCode(500).end(ErrorMessage.toJson(e.getMessage()));
         }
     }
-
     private void handleBooleanQuery(BooleanQuery booleanQuery, RoutingContext context) {
         try {
             boolean result = booleanQuery.evaluate();

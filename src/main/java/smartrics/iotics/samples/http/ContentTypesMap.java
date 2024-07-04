@@ -19,9 +19,6 @@ public class ContentTypesMap {
 
     private static final Map<String, FileFormat> resultFormat = new ConcurrentHashMap<>(8);
 
-    private static final List<SparqlResultType> SPARQL_RESULT_TYPES = Arrays.asList(SPARQL_XML, SPARQL_JSON, SPARQL_CSV);
-    private static final List<SparqlResultType> RDF_RESULT_TYPES = Arrays.asList(RDF_XML, RDF_TURTLE, RDF_NTRIPLES);
-
     public static final FileFormat UNRECOGNISED = new FileFormat("", "", Charset.defaultCharset(), "");
 
     static {
