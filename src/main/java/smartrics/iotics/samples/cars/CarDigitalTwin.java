@@ -10,29 +10,28 @@ import smartrics.iotics.identity.IdentityManager;
 
 public class CarDigitalTwin extends AbstractTwin implements MappablePublisher, MappableMaker, AnnotationMapper {
 
-    public static final String ONT_PREFIX = "https://ontologies.metaphacts.com/iotics-car-digital-twin";
-    public static final String SCHEMA_PREFIX = "http://schema.org";
-
+    @UriProperty(iri = UriConstants.RDFProperty.Type)
+    private final String type = "https://ontologies.metaphacts.com/iotics-car-digital-twin/CarDigitalTwin";
     @UriProperty(iri = UriConstants.IOTICSProperties.HostAllowListName)
     public final String visibility = UriConstants.IOTICSProperties.HostAllowListValues.ALL.toString();
-    @UriProperty(iri = UriConstants.RDFProperty.Type)
-    private final String type = ONT_PREFIX + "/CarDigitalTwin";
-    @LiteralProperty(iri = ONT_PREFIX + "/unit", dataType = XsdDatatype.int_)
+
+    @LiteralProperty(iri = "https://ontologies.metaphacts.com/iotics-car-digital-twin/unit", dataType = XsdDatatype.int_)
     private Integer unit;
     @StringLiteralProperty(iri = UriConstants.RDFSProperty.Comment)
     private String comment;
     @StringLiteralProperty(iri = UriConstants.RDFSProperty.Label)
     private String label;
-    @StringLiteralProperty(iri = ONT_PREFIX + "/manufacturerName")
+    @StringLiteralProperty(iri = "https://ontologies.metaphacts.com/iotics-car-digital-twin/manufacturerName")
     private String manufacturerName;
-    @StringLiteralProperty(iri = SCHEMA_PREFIX + "/color")
+    @StringLiteralProperty(iri = "http://schema.org/color")
     private String colour;
-    @StringLiteralProperty(iri = ONT_PREFIX + "/model")
+    @StringLiteralProperty(iri = "https://ontologies.metaphacts.com/iotics-car-digital-twin/model")
     private String model;
-    @StringLiteralProperty(iri = SCHEMA_PREFIX + "/identifier")
+    @StringLiteralProperty(iri = "http://schema.org/identifier")
     private String identifier;
-    @StringLiteralProperty(iri = SCHEMA_PREFIX + "/givenName")
+    @StringLiteralProperty(iri = "http://schema.org/givenName")
     private String owner;
+
     @Location
     private GeoLocation location;
 

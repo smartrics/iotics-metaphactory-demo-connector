@@ -27,7 +27,7 @@ public class TTLParser {
         String packageName = "smartrics.iotics.samples.cars";
         String rootDirectoryPath = "target/generated-sources/";
 
-        File[] listOfFiles = folder.listFiles((dir, name) -> name.toLowerCase().endsWith("2.ttl"));
+        File[] listOfFiles = folder.listFiles((dir, name) -> name.toLowerCase().endsWith("2.ttl_v1"));
 
         if (listOfFiles == null) {
             LOGGER.warn("No .ttl files found in the directory.");
