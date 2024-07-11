@@ -1,46 +1,32 @@
 @prefix schema: <https://schema.org/> .
-@prefix soa: <https://semopenalex.org/ontology/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix ds: <https://dimensions.ai/ontology/> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix sp: <http://spinrdf.org/sp#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix fabio: <http://purl.org/spar/fabio/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
 <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> a owl:Ontology;
-  rdfs:label "IOTICS smartrics.iotics.samples.cars.Car Digital Twin"@en;
-  dct:modified "2024-06-20T08:40:03.764Z"^^xsd:dateTime;
-  dct:title "IOTICS smartrics.iotics.samples.cars.Car Digital Twin"@en;
+  rdfs:label "IOTICS Car Digital Twin"@en;
+  dct:modified "2024-07-03T10:28:35.436Z"^^xsd:dateTime;
+  dct:title "IOTICS Car Digital Twin"@en;
   owl:versionInfo "0.1";
   <http://www.linkedmodel.org/1.2/schema/vaem#namespace> <https://ontologies.metaphacts.com/iotics-car-digital-twin/>;
-  <http://purl.org/ontology/bibo/status> <http://purl.org/spar/pso/published>;
+  <http://purl.org/ontology/bibo/status> <http://purl.org/spar/pso/draft>;
   owl:imports <https://schema.org/>, <http://data.iotics.com/iotics>;
-  <http://open-services.net/ns/core#modifiedBy> "admin";
+  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
   dct:contributor "admin", "Fabrizio";
   dct:created "2024-06-18T08:03:56.712Z"^^xsd:dateTime;
   dct:creator "admin" .
 
 <https://ontologies.metaphacts.com/iotics-car-digital-twin/CarDigitalTwin> a owl:Class;
-  rdfs:subClassOf schema:smartrics.iotics.samples.cars.Car, <http://data.iotics.com/iotics#DigitalTwin>;
-  rdfs:label "smartrics.iotics.samples.cars.Car Digital Twin"@en;
-  dct:modified "2024-06-20T08:23:27.787Z"^^xsd:dateTime;
+  rdfs:subClassOf schema:Car, <http://data.iotics.com/iotics#DigitalTwin>;
+  rdfs:label "Car Digital Twin"@en;
+  dct:modified "2024-07-03T10:23:11.433Z"^^xsd:dateTime;
   <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
   dct:contributor "admin", "Fabrizio";
   dct:created "2024-06-18T08:08:14.607Z"^^xsd:dateTime;
-  dct:creator "admin";
-  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
-
-<https://ontologies.metaphacts.com/iotics-car-digital-twin/isOperational> a owl:DatatypeProperty;
-  rdfs:label "isOperational";
-  dct:modified "2024-06-18T08:09:17.136Z"^^xsd:dateTime;
-  <http://open-services.net/ns/core#modifiedBy> "admin";
-  dct:contributor "admin";
-  dct:created "2024-06-18T08:09:17.136Z"^^xsd:dateTime;
   dct:creator "admin";
   rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
 
@@ -52,9 +38,6 @@
     ], [
       sh:path <https://ontologies.metaphacts.com/iotics-car-digital-twin/unit>;
       sh:datatype xsd:integer
-    ], [
-      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/OperationalStatus>;
-      sh:path <http://data.iotics.com/iotics#advertises>
     ], [
       sh:path <https://ontologies.metaphacts.com/iotics-car-digital-twin/manufacturerName>;
       sh:datatype xsd:string
@@ -68,6 +51,9 @@
       sh:path <https://ontologies.metaphacts.com/iotics-car-digital-twin/model>;
       sh:datatype xsd:string
     ], [
+      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/LocationData>;
+      sh:path <http://data.iotics.com/iotics#advertises>
+    ], [
       sh:path dct:identifier;
       sh:datatype xsd:string
     ], [
@@ -76,9 +62,6 @@
     ], [
       sh:path schema:givenName;
       sh:datatype xsd:string
-    ], [
-      sh:path <https://ontologies.metaphacts.com/iotics-car-digital-twin/isOperational>;
-      sh:datatype xsd:boolean
     ];
   sh:targetClass <https://ontologies.metaphacts.com/iotics-car-digital-twin/CarDigitalTwin> .
 
@@ -109,84 +92,12 @@
   dct:creator "admin";
   rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
 
-<https://ontologies.metaphacts.com/iotics-car-digital-twin/Status> a owl:Class;
-  rdfs:subClassOf <http://data.iotics.com/iotics#Value>;
-  rdfs:label "Status"@en;
-  dct:modified "2024-06-19T16:41:37.296Z"^^xsd:dateTime;
-  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
-  dct:contributor "Fabrizio";
-  dct:created "2024-06-19T16:41:37.296Z"^^xsd:dateTime;
-  dct:creator "Fabrizio";
-  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
-
-<https://ontologies.metaphacts.com/iotics-car-digital-twin/OperationalStatus> a owl:Class;
-  rdfs:subClassOf <http://data.iotics.com/iotics#Feed>;
-  rdfs:label "OperationalStatus"@en;
-  dct:modified "2024-06-19T16:41:37.296Z"^^xsd:dateTime;
-  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
-  dct:contributor "Fabrizio";
-  dct:created "2024-06-19T16:41:37.296Z"^^xsd:dateTime;
-  dct:creator "Fabrizio";
-  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
-
-<https://ontologies.metaphacts.com/iotics-car-digital-twin/OperationalStatusShape>
-  a sh:NodeShape;
-  sh:property [
-      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/Status>;
-      sh:path <http://data.iotics.com/iotics#presents>
-    ], [
-      sh:path rdfs:label;
-      sh:datatype xsd:string
-    ], [
-      sh:path rdfs:comment;
-      sh:datatype xsd:string
-    ];
-  sh:targetClass <https://ontologies.metaphacts.com/iotics-car-digital-twin/OperationalStatus> .
-
-<https://ontologies.metaphacts.com/iotics-car-digital-twin/StatusShape> a sh:NodeShape;
-  sh:property [
-      sh:path schema:value;
-      sh:datatype xsd:boolean
-    ];
-  sh:targetClass <https://ontologies.metaphacts.com/iotics-car-digital-twin/Status> .
-
-<https://ontologies.metaphacts.com/iotics-car-digital-twin/newRelation> a owl:ObjectProperty;
-  rdfs:label "New relation";
-  dct:modified "2024-06-19T16:46:55.804Z"^^xsd:dateTime;
-  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
-  dct:contributor "Fabrizio";
-  dct:created "2024-06-19T16:46:55.804Z"^^xsd:dateTime;
-  dct:creator "Fabrizio";
-  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
-
-<https://ontologies.metaphacts.com/iotics-car-digital-twin/CarOperationalStatus> a
-    owl:Class;
-  rdfs:subClassOf <http://data.iotics.com/iotics#Feed>;
-  rdfs:label "smartrics.iotics.samples.cars.Car Operational Status"@en;
-  dct:modified "2024-06-20T08:04:09.805Z"^^xsd:dateTime;
-  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
-  dct:contributor "Fabrizio";
-  dct:created "2024-06-20T08:04:09.805Z"^^xsd:dateTime;
-  dct:creator "Fabrizio";
-  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
-
-<https://ontologies.metaphacts.com/iotics-car-digital-twin/CarOperationalStatusValue>
-  a owl:Class;
-  rdfs:subClassOf <http://data.iotics.com/iotics#Value>;
-  rdfs:label "smartrics.iotics.samples.cars.Car Operational Status Value"@en;
-  dct:modified "2024-06-20T08:04:09.805Z"^^xsd:dateTime;
-  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
-  dct:contributor "Fabrizio";
-  dct:created "2024-06-20T08:04:09.805Z"^^xsd:dateTime;
-  dct:creator "Fabrizio";
-  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
-
 <https://ontologies.metaphacts.com/iotics-car-digital-twin/OperationalStatusFeed>
   a owl:Class;
   rdfs:subClassOf skos:Concept, <http://data.iotics.com/iotics#Feed>;
   rdfs:label "Operational Status Feed"@en;
-  dct:modified "2024-06-20T08:40:03.764Z"^^xsd:dateTime;
-  <http://open-services.net/ns/core#modifiedBy> "admin";
+  dct:modified "2024-06-28T09:50:31.978Z"^^xsd:dateTime;
+  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
   dct:contributor "admin", "Fabrizio";
   dct:created "2024-06-20T08:23:27.787Z"^^xsd:dateTime;
   dct:creator "Fabrizio";
@@ -226,3 +137,87 @@
       ] [
         sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/OperationalStatusFeed>
       ]) .
+
+<https://ontologies.metaphacts.com/iotics-car-digital-twin/location> a owl:DatatypeProperty;
+  rdfs:label "location";
+  dct:modified "2024-06-28T09:50:31.978Z"^^xsd:dateTime;
+  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
+  dct:contributor "Fabrizio";
+  dct:created "2024-06-28T09:50:31.978Z"^^xsd:dateTime;
+  dct:creator "Fabrizio";
+  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
+
+<https://ontologies.metaphacts.com/iotics-car-digital-twin/LocationData> a owl:Class;
+  rdfs:subClassOf <http://data.iotics.com/iotics#Feed>;
+  rdfs:label "LocationData"@en;
+  rdfs:comment "represents the motion data of this car"@en;
+  dct:modified "2024-07-03T10:28:35.436Z"^^xsd:dateTime;
+  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
+  dct:contributor "Fabrizio";
+  dct:created "2024-07-03T10:23:11.433Z"^^xsd:dateTime;
+  dct:creator "Fabrizio";
+  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
+
+<https://ontologies.metaphacts.com/iotics-car-digital-twin/LocationDataShape> a sh:NodeShape;
+  sh:property [
+      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/Status>;
+      sh:path <http://data.iotics.com/iotics#presents>
+    ], [
+      sh:path schema:frequency;
+      sh:datatype xsd:integer
+    ], [
+      sh:path rdfs:label;
+      sh:datatype xsd:string;
+      sh:minCount 1;
+      sh:maxCount 1
+    ], [
+      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/LongitudeValue>;
+      sh:path <http://data.iotics.com/iotics#presents>
+    ], [
+      sh:path <http://data.iotics.com/iotics#pointName>;
+      sh:datatype xsd:string;
+      sh:minCount 1;
+      sh:maxCount 1
+    ], [
+      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/Speed>;
+      sh:path <http://data.iotics.com/iotics#presents>
+    ], [
+      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/Direction>;
+      sh:path <http://data.iotics.com/iotics#presents>
+    ], [
+      sh:path <http://data.iotics.com/iotics#storesLast>;
+      sh:datatype xsd:boolean;
+      sh:minCount 1;
+      sh:maxCount 1
+    ];
+  sh:targetClass <https://ontologies.metaphacts.com/iotics-car-digital-twin/LocationData> .
+
+<https://ontologies.metaphacts.com/iotics-car-digital-twin/LongitudeValue> a owl:Class;
+  rdfs:subClassOf <http://data.iotics.com/iotics#Value>;
+  rdfs:label "Longitude Value"@en;
+  dct:modified "2024-07-03T10:26:32.960Z"^^xsd:dateTime;
+  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
+  dct:contributor "Fabrizio";
+  dct:created "2024-07-03T10:26:19.720Z"^^xsd:dateTime;
+  dct:creator "Fabrizio";
+  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
+
+<https://ontologies.metaphacts.com/iotics-car-digital-twin/Speed> a owl:Class;
+  rdfs:subClassOf <http://data.iotics.com/iotics#Value>;
+  rdfs:label "Speed"@en;
+  dct:modified "2024-07-03T10:28:35.436Z"^^xsd:dateTime;
+  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
+  dct:contributor "Fabrizio";
+  dct:created "2024-07-03T10:28:35.436Z"^^xsd:dateTime;
+  dct:creator "Fabrizio";
+  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
+
+<https://ontologies.metaphacts.com/iotics-car-digital-twin/Direction> a owl:Class;
+  rdfs:subClassOf <http://data.iotics.com/iotics#Value>;
+  rdfs:label "Direction"@en;
+  dct:modified "2024-07-03T10:28:35.436Z"^^xsd:dateTime;
+  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
+  dct:contributor "Fabrizio";
+  dct:created "2024-07-03T10:28:35.436Z"^^xsd:dateTime;
+  dct:creator "Fabrizio";
+  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .

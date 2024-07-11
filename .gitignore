@@ -5,6 +5,7 @@ target/
 ssl/
 .env
 **/*.log
+stash/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
