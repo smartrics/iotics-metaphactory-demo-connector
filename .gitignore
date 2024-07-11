@@ -6,6 +6,7 @@ ssl/
 .env
 **/*.log
 stash/
+src/main/resources/identity/*.json
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
