@@ -9,7 +9,7 @@
 
 <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> a owl:Ontology;
   rdfs:label "IOTICS Car Digital Twin"@en;
-  dct:modified "2024-07-03T10:28:35.436Z"^^xsd:dateTime;
+  dct:modified "2024-07-11T13:26:38.287Z"^^xsd:dateTime;
   dct:title "IOTICS Car Digital Twin"@en;
   owl:versionInfo "0.1";
   <http://www.linkedmodel.org/1.2/schema/vaem#namespace> <https://ontologies.metaphacts.com/iotics-car-digital-twin/>;
@@ -23,10 +23,19 @@
 <https://ontologies.metaphacts.com/iotics-car-digital-twin/CarDigitalTwin> a owl:Class;
   rdfs:subClassOf schema:Car, <http://data.iotics.com/iotics#DigitalTwin>;
   rdfs:label "Car Digital Twin"@en;
-  dct:modified "2024-07-03T10:23:11.433Z"^^xsd:dateTime;
+  dct:modified "2024-07-11T13:26:38.287Z"^^xsd:dateTime;
   <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
   dct:contributor "admin", "Fabrizio";
   dct:created "2024-06-18T08:08:14.607Z"^^xsd:dateTime;
+  dct:creator "admin";
+  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
+
+<https://ontologies.metaphacts.com/iotics-car-digital-twin/isOperational> a owl:DatatypeProperty;
+  rdfs:label "isOperational";
+  dct:modified "2024-06-18T08:09:17.136Z"^^xsd:dateTime;
+  <http://open-services.net/ns/core#modifiedBy> "admin";
+  dct:contributor "admin";
+  dct:created "2024-06-18T08:09:17.136Z"^^xsd:dateTime;
   dct:creator "admin";
   rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
 
@@ -42,6 +51,9 @@
       sh:path <https://ontologies.metaphacts.com/iotics-car-digital-twin/manufacturerName>;
       sh:datatype xsd:string
     ], [
+      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/LocationData>;
+      sh:path <http://data.iotics.com/iotics#advertises>
+    ], [
       sh:path schema:color;
       sh:datatype xsd:string
     ], [
@@ -50,9 +62,6 @@
     ], [
       sh:path <https://ontologies.metaphacts.com/iotics-car-digital-twin/model>;
       sh:datatype xsd:string
-    ], [
-      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/LocationData>;
-      sh:path <http://data.iotics.com/iotics#advertises>
     ], [
       sh:path dct:identifier;
       sh:datatype xsd:string
@@ -90,6 +99,29 @@
   dct:contributor "admin", "Fabrizio";
   dct:created "2024-06-18T08:10:00.381Z"^^xsd:dateTime;
   dct:creator "admin";
+  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
+
+<https://ontologies.metaphacts.com/iotics-car-digital-twin/Status> a owl:Class;
+  rdfs:subClassOf <http://data.iotics.com/iotics#Value>;
+  rdfs:label "Latitude Value"@en;
+  rdfs:comment "latitude value"@en;
+  dct:modified "2024-07-03T10:26:19.720Z"^^xsd:dateTime;
+  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
+  dct:contributor "Fabrizio";
+  dct:created "2024-06-19T16:41:37.296Z"^^xsd:dateTime;
+  dct:creator "Fabrizio";
+  rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
+
+<https://ontologies.metaphacts.com/iotics-car-digital-twin/StatusShape> a sh:NodeShape;
+  sh:targetClass <https://ontologies.metaphacts.com/iotics-car-digital-twin/Status> .
+
+<https://ontologies.metaphacts.com/iotics-car-digital-twin/newRelation> a owl:ObjectProperty;
+  rdfs:label "New relation";
+  dct:modified "2024-06-19T16:46:55.804Z"^^xsd:dateTime;
+  <http://open-services.net/ns/core#modifiedBy> "Fabrizio";
+  dct:contributor "Fabrizio";
+  dct:created "2024-06-19T16:46:55.804Z"^^xsd:dateTime;
+  dct:creator "Fabrizio";
   rdfs:isDefinedBy <https://ontologies.metaphacts.com/iotics-car-digital-twin/0.1> .
 
 <https://ontologies.metaphacts.com/iotics-car-digital-twin/OperationalStatusFeed>
@@ -160,16 +192,11 @@
 
 <https://ontologies.metaphacts.com/iotics-car-digital-twin/LocationDataShape> a sh:NodeShape;
   sh:property [
-      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/Status>;
+      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/Direction>;
       sh:path <http://data.iotics.com/iotics#presents>
     ], [
-      sh:path schema:frequency;
-      sh:datatype xsd:integer
-    ], [
-      sh:path rdfs:label;
-      sh:datatype xsd:string;
-      sh:minCount 1;
-      sh:maxCount 1
+      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/Speed>;
+      sh:path <http://data.iotics.com/iotics#presents>
     ], [
       sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/LongitudeValue>;
       sh:path <http://data.iotics.com/iotics#presents>
@@ -179,11 +206,16 @@
       sh:minCount 1;
       sh:maxCount 1
     ], [
-      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/Speed>;
+      sh:path schema:frequency;
+      sh:datatype xsd:integer
+    ], [
+      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/Status>;
       sh:path <http://data.iotics.com/iotics#presents>
     ], [
-      sh:class <https://ontologies.metaphacts.com/iotics-car-digital-twin/Direction>;
-      sh:path <http://data.iotics.com/iotics#presents>
+      sh:path rdfs:label;
+      sh:datatype xsd:string;
+      sh:minCount 1;
+      sh:maxCount 1
     ], [
       sh:path <http://data.iotics.com/iotics#storesLast>;
       sh:datatype xsd:boolean;
